@@ -11,4 +11,7 @@ typedef	struct		s_dlst
 	struct s_dlst	*prev;
 }					t_dlst;
 
+
+/* validate_args.c */
+int validate_args(int ac, char **av);
 #endif
