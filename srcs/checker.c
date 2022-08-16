@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/15 17:38:41 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/16 15:23:15 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 int main(int ac, char **av)
 {
+	(void)ac;
+	ft_putstr(av[0]);
 	return (0);
 }

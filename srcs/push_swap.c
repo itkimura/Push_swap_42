@@ -9,6 +9,7 @@
 
 int main(int ac, char **av)
 {
+/*
 	t_dlst	*stack_a;
 	t_dlst	*stack_b;
 	int		*list;
@@ -16,6 +17,7 @@ int main(int ac, char **av)
 	stack_a = NULL;
 	stack_b = NULL;
 	list = NULL;
+*/
 	if (!validate_args(ac, av))
 	{
 		ft_putstr("ERROR\n");
