@@ -25,3 +25,13 @@ make help
 | Name | Description |
 | --- | --- |
 | t_dlst | double linked list for stack |
+
+## Files
+All source files are in ./srcs/
+| Name | Description |
+| --- | --- |
+| push_swap.c | main for push_swap |
+| validate_arg.c | validate inputs as integers |
+| checker.c | source file for checker |
+
+
