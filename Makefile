@@ -6,7 +6,7 @@
 #    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 11:55:29 by itkimura          #+#    #+#              #
-#    Updated: 2022/08/16 15:32:05 by itkimura         ###   ########.fr        #
+#    Updated: 2022/08/17 10:42:46 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,8 @@ help:
 libft: $(LIBFT)
 
 $(LIBFT):
-	make -s fclean -C ./libft && make -s -C ./libft
+# make -s fclean -C ./libft && make -s -C ./libft
+	@make -s -C ./libft
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
