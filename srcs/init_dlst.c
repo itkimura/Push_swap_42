@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/17 17:51:33 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:50:44 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,29 @@
  *
 */
 
-int	is_valid_str(char *arg)
+int	dublicate(char *input)
 {
-	int	i;
-
-	i = 0;
-	while (arg[i])
-	{
-		if ((arg[i] == '-' || arg[i] == '+') && !(arg[i + 1] >= '0' && arg[i + 1] <= '9'))
-			return (0);
-		if (!(*arg >= '0' && *arg <= '9') && *arg != ' ' && *arg != '-' && *arg != '+')
-			return (0);
-		i++;
-	}
+	(void)input;
 	return (1);
+}
+
+long int	ft_atoli(char *arg)
+{
+	long int	nb;
+	int			flag;
+
+	nb = 0;
+	flag = 1;
+	if (*arg == '-')
+		flag = -1;
+	if (*arg == '-' || *arg == '+')
+		arg++;
+	while (*arg)
+	{
+		nb = nb * 10 + (*arg - '0');
+		arg++;
+	}
+	return (nb * flag);
 }
 
 int nb_of_arg(char *arg)
@@ -54,21 +63,24 @@ int nb_of_arg(char *arg)
 	return (nb);
 }
 
-int	validate_args(int ac, char **av)
+t_dlst	*dlstnew(long int arg)
 {
-	int	i;
+	t_dlst	*new;
 
-	i = 1;
-	if (ac < 2)
+	new = (t_dlst *)malloc(sizeof(t_dlst));
+	if (!new)
 		return (0);
-	while (i < ac)
+	new->value = (long int)malloc(sizeof(long int));
+	if (!new->value)
 	{
-		if (!is_valid_str(av[i]))
-		{
-			ft_putstr("ERROR\n");
-			return (0);
-		}
-		i++;
+		free(new);
+		return (0);
 	}
-	return (1);
+	new->value = arg;
+	new->next = NULL;
+	return (new);
+}
+
+int	init_dlst(int ac, char **av)
+{
 }

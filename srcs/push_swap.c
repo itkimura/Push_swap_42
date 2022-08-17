@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/17 15:39:49 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:51:51 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 int	main(int ac, char **av)
 {
 	if (!validate_args(ac, av))
+		return (1);
+	if (!init_dlst(ac, av))
 	{
 		ft_putstr("ERROR\n");
 		return (1);
