@@ -6,7 +6,7 @@
 #    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 11:55:29 by itkimura          #+#    #+#              #
-#    Updated: 2022/08/17 12:48:42 by itkimura         ###   ########.fr        #
+#    Updated: 2022/08/17 12:52:56 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,11 +80,12 @@ clean:
 	@echo "${BOLD}[pushc_swap]${RESET}\tObject files has been deleted"
 
 fclean:
+	@rm -rf $(OBJS_DIR)
 	@rm -f $(NAME) $(CHECKER)
 	@make -s fclean -C ./libft
 	@echo "${BOLD}[push_swap]${RESET}\tExcutable file has been deleted"
 
-re: clean fclean all
+re: fclean all
 
 .PHONY: all clean fclean re
 
