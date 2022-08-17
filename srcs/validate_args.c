@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/16 17:04:25 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/17 10:40:18 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,7 @@ int dublicate(char *input)
 	return (1);
 }
 
-int is_int(char *input)
-{
-	(void)input;
-	return (1);
-}
-
-int is_digit(char *arg)
+int is_int(char *arg)
 {
 	int i;
 
@@ -43,6 +37,11 @@ int is_digit(char *arg)
 			return (0);
 		i++;
 	}
+	if (ft_atoi(arg) > INT_MAX || ft_atoi(arg) < INT_MIN)
+	{
+		printf("arg = %d\n", ft_atoi(arg));
+		return (0);
+	}
 	return (1);
 }
 
@@ -53,10 +52,11 @@ int validate_args(int ac, char **av)
 	i = 1;
 	if (ac < 2)
 		return (0);
-	while (i < 1)
+	while (i < ac)
 	{
-		if (!is_digit(av[i]))
+		if (!is_int(av[i]))
 			return (0);
+		i++;
 	}
 	return (1);
 }
