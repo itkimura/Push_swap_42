@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/17 10:40:18 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/17 11:45:11 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,32 @@ int dublicate(char *input)
 
 int is_int(char *arg)
 {
-	int i;
+	long int	nb;
+	int			flag;
+
+	nb = 0;
+	flag = 1;
+	if (*arg == '-')
+	{
+		flag = -1;
+		arg++;
+	}
+	while(*arg)
+	{
+		if (!(*arg >= '0' && *arg <= '9'))
+			return (0);
+		else
+			nb = nb * 10 + (*arg - '0');
+		arg++;
+	}
+	if (nb > INT_MAX || nb < INT_MIN)
+		return (0);
+	return (1);
+}
+
+int is_digit(char *arg)
+{
+	int	i;
 
 	i = 0;
 	if (arg[i] == '-')
@@ -37,6 +62,7 @@ int is_int(char *arg)
 			return (0);
 		i++;
 	}
+		printf("arg = %d\n", ft_atoi(arg));
 	if (ft_atoi(arg) > INT_MAX || ft_atoi(arg) < INT_MIN)
 	{
 		printf("arg = %d\n", ft_atoi(arg));
@@ -54,7 +80,7 @@ int validate_args(int ac, char **av)
 		return (0);
 	while (i < ac)
 	{
-		if (!is_int(av[i]))
+		if (!is_digit(av[i]) || !is_int(av[i]))
 			return (0);
 		i++;
 	}

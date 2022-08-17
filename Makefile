@@ -6,7 +6,7 @@
 #    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 11:55:29 by itkimura          #+#    #+#              #
-#    Updated: 2022/08/17 10:42:46 by itkimura         ###   ########.fr        #
+#    Updated: 2022/08/17 12:48:42 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,26 +61,30 @@ $(LIBFT):
 	@make -s -C ./libft
 
 $(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-	gcc $(FLAGS) $(INCL) -o $@ -c $<
+	@gcc $(FLAGS) $(INCL) -o $@ -c $<
 
 $(NAME): $(OBJS_DIR) $(OBJS)
-	gcc $(FLAGS) $(INCL) -o $@ $(OBJS) $(LIB)
+	@gcc $(FLAGS) $(INCL) -o $@ $(OBJS) $(LIB)
+	@echo "${BOLD}[push_swap]${RESET}\tCompiled!"
 
 $(CHECKER): $(OBJS_DIR) $(CHECKER_OBJS) 
-	gcc $(FLAGS) $(INCL) -o $@ $(CHECKER_OBJS) $(LIB)
+	@gcc $(FLAGS) $(INCL) -o $@ $(CHECKER_OBJS) $(LIB)
+	@echo "${BOLD}[checker]${RESET}\tCompiled!"
 
 clean:
 	@rm -rf $(OBJS_DIR)
 	@make -s clean -C ./libft
+	@echo "${BOLD}[pushc_swap]${RESET}\tObject files has been deleted"
 
-fclean: clean
+fclean:
 	@rm -f $(NAME) $(CHECKER)
 	@make -s fclean -C ./libft
+	@echo "${BOLD}[push_swap]${RESET}\tExcutable file has been deleted"
 
-re: fclean all
+re: clean fclean all
 
 .PHONY: all clean fclean re
 
