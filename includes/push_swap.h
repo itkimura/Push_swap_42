@@ -2,7 +2,11 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
+# include <limits.h>
 # include "libft.h"
+
+/*Delete later*/
+# include <stdio.h>
 
 typedef	struct		s_dlst
 {
