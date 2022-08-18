@@ -16,7 +16,7 @@ ger arguments received.
 
 
 ## Makefile help
-How to see the mmake command options:
+How to see the make command options:
 ```
 make help
 ```
