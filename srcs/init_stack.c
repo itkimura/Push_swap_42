@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/18 17:06:02 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/18 17:17:14 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	free_stack(t_dlst **stack)
 		next = (*stack)->next;
 		free(*stack);
 		*stack = next;
+		i++;
 	}
 	*stack = tmp;
 	*stack = NULL;
@@ -65,6 +66,11 @@ int	init_stack(t_dlst **stack_a, t_dlst **stack_b, int *numbers, int total)
 	while (i < total)
 	{
 		tmp = dlstnew(next, &numbers[i]);
+		if (!tmp)
+		{
+			free_stack(stack_a);
+			return (error());
+		}
 		next->next = tmp;
 		next = next->next;
 		i++;
