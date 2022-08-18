@@ -16,7 +16,7 @@ ger arguments received.
 
 
 ## Makefile help
-How to see the mmake command options:
+How to see the make command options:
 ```
 make help
 ```
@@ -38,7 +38,7 @@ All source files are in ./srcs/
 ## Flowchart
 ```mermaid
   graph TD;
-      push_swap-->validate_args;
+      main-->validate_args;
       validate_args-->|All inputs are valid|init_numbers;
       init_numbers-->|No duplication and all numbers are valid as int. Insert all into int string |init_stack;
 ```
