@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/17 17:51:33 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/18 12:22:18 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,40 +18,22 @@
  *
 */
 
-int	is_valid_str(char *arg)
+int	is_valid_str(char *av)
 {
 	int	i;
 
 	i = 0;
-	while (arg[i])
+	while (av[i])
 	{
-		if ((arg[i] == '-' || arg[i] == '+') && !(arg[i + 1] >= '0' && arg[i + 1] <= '9'))
+		if ((av[i] == '-' || av[i] == '+')
+			&& !(av[i + 1] >= '0' && av[i + 1] <= '9'))
 			return (0);
-		if (!(*arg >= '0' && *arg <= '9') && *arg != ' ' && *arg != '-' && *arg != '+')
+		if (!(av[i] >= '0' && av[i] <= '9')
+			&& av[i] != ' ' && av[i] != '-' && av[i] != '+')
 			return (0);
 		i++;
 	}
 	return (1);
-}
-
-int nb_of_arg(char *arg)
-{
-	int	nb;
-
-	nb = 0;
-	while (*arg)
-	{
-		if (*arg != ' ')
-		{
-			nb++;
-			while ((*arg >= '0' && *arg <= '9') || *arg == '-' || *arg == '+')
-				arg++;
-			if (!*arg)
-				break ;
-		}
-		arg++;
-	}
-	return (nb);
 }
 
 int	validate_args(int ac, char **av)
@@ -64,10 +46,7 @@ int	validate_args(int ac, char **av)
 	while (i < ac)
 	{
 		if (!is_valid_str(av[i]))
-		{
-			ft_putstr("ERROR\n");
-			return (0);
-		}
+			return (error());
 		i++;
 	}
 	return (1);

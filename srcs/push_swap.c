@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/17 17:51:51 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/18 17:04:49 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,26 @@
  * 
 */
 
-/*
- * t_dlst	*stack_a;
- * t_dlst	*stack_b;
- * int		*list;
- *
- * stack_a = NULL;
- * stack_b = NULL;
- * list = NULL;
-*/
+int	error(void)
+{
+	ft_putstr("ERROR\n");
+	return (0);
+}
 
 int	main(int ac, char **av)
 {
-	if (!validate_args(ac, av))
+	t_dlst	*stack_a;
+	t_dlst	*stack_b;
+	int		*numbers;
+	int		total;
+
+	stack_a = NULL;
+	stack_b = NULL;
+	numbers = NULL;
+	if (!validate_args(ac, av) || !init_numbers(ac, av, &numbers, &total) 
+		|| !init_stack(&stack_a, &stack_b, numbers, total))
 		return (1);
-	if (!init_dlst(ac, av))
-	{
-		ft_putstr("ERROR\n");
-		return (1);
-	}
-	else
-	{
-		ft_putstr("OK\n");
-		return (0);
-	}
+	ft_putstr("OK\n");
+	printf("stack_a = %d\n", *stack_a->value);
+	return (0);
 }
