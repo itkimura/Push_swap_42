@@ -35,3 +35,11 @@ All source files are in ./srcs/
 | checker.c | source file for checker |
 
 
+## Flowchart
+```mermaid
+  graph TD;
+      main-->validate_args;
+      validate_args-->|All inputs are valid|init_numbers;
+      init_numbers-->|No duplication and all numbers are valid as int. Insert all into int string |init_stack;
+```
+
