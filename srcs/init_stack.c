@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_args.c                                    :+:      :+:    :+:   */
+/*   init_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/18 17:17:14 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/20 14:57:56 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  *
 */
 
-t_dlst	*dlstnew(t_dlst *prev, int *number)
+t_dlst	*dlstnew(t_dlst *prev, int number)
 {
 	t_dlst	*new;
 
@@ -58,14 +58,14 @@ int	init_stack(t_dlst **stack_a, t_dlst **stack_b, int *numbers, int total)
 	t_dlst	*next;
 
 	i = 0;
-	*stack_a = dlstnew(NULL, &numbers[i++]);
+	*stack_a = dlstnew(NULL, numbers[i++]);
 	*stack_b = dlstnew(NULL, 0);
 	if (!*stack_a || !*stack_b)
 		return (error());
 	next = *stack_a;
 	while (i < total)
 	{
-		tmp = dlstnew(next, &numbers[i]);
+		tmp = dlstnew(next, numbers[i]);
 		if (!tmp)
 		{
 			free_stack(stack_a);

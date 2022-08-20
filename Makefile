@@ -6,7 +6,7 @@
 #    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 11:55:29 by itkimura          #+#    #+#              #
-#    Updated: 2022/08/18 17:10:02 by itkimura         ###   ########.fr        #
+#    Updated: 2022/08/20 13:41:12 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ SRCS_DIR = ./srcs/
 OBJS_DIR = ./objects/
 
 # FILES
-SRC_FILES =		push_swap.c		validate_args.c		init_stack.c \
-				init_numbers.c	
+SRC_FILES =		push_swap.c		init_stack.c \
+				init_numbers.c	print.c
 CHECKER_FILES = checker.c
 SRCS		= $(addprefix	$(SRCS_DIR), $(SRC_FILES))
 OBJS		= $(addprefix	$(OBJS_DIR), $(SRC_FILES:.c=.o))

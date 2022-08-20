@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/18 17:04:49 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/20 14:33:47 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 int	error(void)
 {
-	ft_putstr("ERROR\n");
+	ft_putstr("Error\n");
 	return (0);
 }
 
@@ -32,13 +32,16 @@ int	main(int ac, char **av)
 	int		*numbers;
 	int		total;
 
-	stack_a = NULL;
-	stack_b = NULL;
-	numbers = NULL;
-	if (!validate_args(ac, av) || !init_numbers(ac, av, &numbers, &total) 
-		|| !init_stack(&stack_a, &stack_b, numbers, total))
-		return (1);
-	ft_putstr("OK\n");
-	printf("stack_a = %d\n", *stack_a->value);
+	if (ac >= 2)
+	{
+		stack_a = NULL;
+		stack_b = NULL;
+		numbers = NULL;
+		if (!init_numbers(ac, av, &numbers, &total) 
+			|| !init_stack(&stack_a, &stack_b, numbers, total))
+			return (1);
+		ft_putstr("OK\n");
+		print_stack(stack_a, stack_b, total);
+	}
 	return (0);
 }
