@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/20 14:39:59 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/20 21:14:42 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,28 @@
 
 /* Check duplication in int string */
 
+int	is_valid_nb(char *str, int *i)
+{
+	if ((str[*i] == '-' || str[*i] == '+'))
+	{
+		if (!(str[*i + 1] >= '0' && str[*i + 1] <= '9'))
+		{
+			printf("Too many sign\n");
+			return (0);
+		}
+		(*i)++;
+	}
+	while (str[*i] != ' ' && str[*i])
+	{
+		if (!(str[*i] >= '0' && str[*i] <= '9'))
+		{
+			printf("Non numeric number\n");
+			return (0);
+		}
+		(*i)++;
+	}
+	return (1);
+}
 int	dublicate_check(int *numbers, int *total)
 {
 	int	i;
@@ -59,17 +81,13 @@ int	is_valid_str(int ac, char **av, int *total)
 		j = 0;
 		while (av[i][j])
 		{
-			if (!(av[i][j] >= '0' && av[i][j] <= '9')
-				&& av[i][j] != ' ' && av[i][j] != '-' && av[i][j] != '+')
-			{
-				printf("Non numeric letter\n");
+			while (av[i][j] == ' ')
+				j++;
+			if (!is_valid_nb(av[i], &j))
 				return (0);
-			}
-			if (((av[i][j] >= '0' && av[i][j] <= '9')
-				|| av[i][j] == '-' || av[i][j] == '+')
-				&& (av[i][j - 1] == ' ' || j == 0))
 			(*total)++;
-			j++;
+			if (av[i][j])
+				j++;
 		}
 		i++;
 	}
@@ -77,38 +95,6 @@ int	is_valid_str(int ac, char **av, int *total)
 }
 
 /* convert char to long int */
-
-long int	ft_atoli(char *av, int *number)
-{
-	int			flag;
-	long int	nb;
-
-	nb = 0;
-	flag = 1;
-	while (*av == ' ')
-		av++;
-	if (*av == '-')
-		flag = -1;
-	if (*av == '-' || *av == '+')
-		av++;
-	if (!(*av >= '0' && *av <= '9'))
-	{
-		printf("Too many flags\n");
-		return (0);
-	}
-	while (*av >= '0' && *av <= '9')
-	{
-		nb = nb * 10 + (*av - '0');
-		av++;
-	}
-	if (nb * flag < INT_MIN || nb * flag > INT_MAX)
-	{
-		printf("INT_MIN or INT_MAX\n");
-		return (0);
-	}
-	*number = (int)(nb * flag);
-	return (1);
-}
 
 /*
  * Devides each numbers in strings
@@ -121,6 +107,7 @@ long int	ft_atoli(char *av, int *number)
 int	devide_numbers(int ac, char **av, int *numbers, int *count)
 {
 	int			i;
+	long int	tmp;
 
 	i = 1;
 	while (i < ac)
@@ -129,13 +116,17 @@ int	devide_numbers(int ac, char **av, int *numbers, int *count)
 		{
 			while (*av[i] == ' ')
 				av[i]++;
-			if(!ft_atoli(av[i], &numbers[(*count)++]))
+			tmp = ft_atoli(av[i]);
+			if (tmp < INT_MIN || tmp > INT_MAX)
+			{
+				printf("INT_MIN or INT_MAX\n");
 				return (0);
-			while ((*av[i] >= '0' && *av[i] <= '9')
-				|| *av[i] == '-' || *av[i] == '+')
+			}
+			numbers[(*count)++] = (int)tmp;
+			while ((*av[i] >= '0' && *av[i] <= '9') || *av[i] == '-' || *av[i] == '+')
 				av[i]++;
 			if (*av[i])
-			av[i]++;
+				av[i]++;
 		}
 		i++;
 	}
