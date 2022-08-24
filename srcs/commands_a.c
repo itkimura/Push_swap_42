@@ -15,19 +15,17 @@ int	sa(t_dlst *a)
 
 int	pa(t_dlst *a, t_dlst *b)
 {
-	t_dlst *top_a;
-	t_dlst *top_b;
 	t_dlst *tmp;
 
 	ft_putstr("pb\n");
-	if (a->next == )
+	if (b->next == NULL)
 		return (0);
-	tmp = a->next;
-	a->next = a->next->next;
-	a->next->prev = a;
-	tmp->next = b->next;
-	b->next = tmp;
-	tmp->prev = b;
+	tmp = b->next;
+	b->next = b->next->next;
+	b->next->prev = b;
+	tmp->next = a->next;
+	a->next = tmp;
+	tmp->prev = a;
 	return (1);
 }
 

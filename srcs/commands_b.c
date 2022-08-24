@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int	sa(t_dlst *a)
+int	sb(t_dlst *a)
 {
 	int	tmp;
 
@@ -13,20 +13,25 @@ int	sa(t_dlst *a)
 	return (1);
 }
 
-int	pa(t_dlst *a, t_dlst *b)
+int	pb(t_dlst *a, t_dlst *b)
 {
 	t_dlst *top_a;
 	t_dlst *top_b;
 	t_dlst *tmp;
 
 	ft_putstr("pb\n");
-	if (a->next == )
+	if (a->next == NULL)
 		return (0);
+	top_a = a->next->next;
+	top_b = b->next;
 	tmp = a->next;
-	a->next = a->next->next;
-	a->next->prev = a;
-	tmp->next = b->next;
+	a->next = top_a;
+	top_a->prev = a;
 	b->next = tmp;
+	if (top_b == NULL)
+		tmp->next = b;
+	else
+		tmp->next = top_b;
 	tmp->prev = b;
 	return (1);
 }

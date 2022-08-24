@@ -31,7 +31,7 @@ int	init_stack(int ac, char **av, t_dlst **stack_a, int *total);
 int	sa(t_dlst *s);
 int	pa(t_dlst *a, t_dlst *b);
 
-/* commands_a.c */
+/* commands_b.c */
 int	sb(t_dlst *s);
 int	pb(t_dlst *a, t_dlst *b);
 
