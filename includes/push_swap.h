@@ -18,12 +18,24 @@ typedef	struct		s_dlst
 /* push_swap.h */
 int	error(void);
 
-/* init_numbers */
-int	init_numbers(int ac, char **av, int **numbers, int *total);
+/* validation.c */
+int	is_valid_nb(char *str, int *i);
+int	is_valid_str(char *str, t_dlst **curr, int *count);
 
 /* init_stack */
-int	init_stack(t_dlst **stack_a, t_dlst **stack_b, int *numbers, int total);
+t_dlst	*dlstnew(t_dlst *prev, int number);
+int	add_stack(char *str, t_dlst **curr, int *count);
+int	init_stack(int ac, char **av, t_dlst **stack_a, int *total);
+
+/* commands_a.c */
+int	sa(t_dlst *s);
+int	pa(t_dlst *a, t_dlst *b);
+
+/* commands_a.c */
+int	sb(t_dlst *s);
+int	pb(t_dlst *a, t_dlst *b);
 
 /*Delete later print.c*/
+void	print_detail(t_dlst *stack_a, t_dlst *stack_b);
 void	print_stack(t_dlst *stack_a, t_dlst *stack_b, int total);
 #endif

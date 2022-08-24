@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/20 14:57:56 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/23 11:03:24 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,24 @@
  * return (1) = true
  *
 */
+
+int	dublicate_check(int tmp, t_dlst **curr)
+{
+	t_dlst	*start;
+
+	start = *curr;
+	while (*curr)
+	{
+		if (tmp == (*curr)->value)
+		{
+			printf("Duplication\n");
+			return (0);
+		}
+		*curr = (*curr)->prev;
+	}
+	*curr = start;
+	return (1);
+}
 
 t_dlst	*dlstnew(t_dlst *prev, int number)
 {
@@ -33,9 +51,9 @@ t_dlst	*dlstnew(t_dlst *prev, int number)
 
 void	free_stack(t_dlst **stack)
 {
-	int i;
-	t_dlst *tmp;
-	t_dlst *next;
+	int		i;
+	t_dlst	*tmp;
+	t_dlst	*next;
 
 	i = 0;
 	next = *stack;
@@ -51,29 +69,48 @@ void	free_stack(t_dlst **stack)
 	*stack = NULL;
 }
 
-int	init_stack(t_dlst **stack_a, t_dlst **stack_b, int *numbers, int total)
+int	add_stack(char *str, t_dlst **curr, int *total)
+{
+	long int	tmp;
+	t_dlst		*new;
+
+	tmp = ft_atoli(str);
+	if (tmp < INT_MIN || tmp > INT_MAX)
+	{
+		printf("INT_MIN or INT_MAX\n");
+		return (0);
+	}
+	if (!dublicate_check(tmp, curr))
+		return (0);
+	new = dlstnew(*curr, (int)tmp);
+	if (!new)
+		return (0);
+	(*curr)->next = new;
+	(*curr) = (*curr)->next;
+	(*total)++;
+	return (1);
+}
+
+int	init_stack(int ac, char **av, t_dlst **stack_a, int *total)
 {
 	int		i;
-	t_dlst	*tmp;
-	t_dlst	*next;
+	t_dlst	*curr;
 
-	i = 0;
-	*stack_a = dlstnew(NULL, numbers[i++]);
-	*stack_b = dlstnew(NULL, 0);
-	if (!*stack_a || !*stack_b)
+	i = 1;
+	*stack_a = dlstnew(NULL, 0);
+	if (!*stack_a)
 		return (error());
-	next = *stack_a;
-	while (i < total)
+	curr = *stack_a;
+	while (i < ac)
 	{
-		tmp = dlstnew(next, numbers[i]);
-		if (!tmp)
+		if (!is_valid_str(av[i], &curr, total))
 		{
 			free_stack(stack_a);
 			return (error());
 		}
-		next->next = tmp;
-		next = next->next;
 		i++;
 	}
+	curr->next = *stack_a;
+	(*stack_a)->prev = curr;
 	return (1);
 }

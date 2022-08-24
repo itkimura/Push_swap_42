@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/20 14:33:47 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/23 11:14:35 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,27 @@ int	error(void)
 
 int	main(int ac, char **av)
 {
+	int total;
 	t_dlst	*stack_a;
 	t_dlst	*stack_b;
-	int		*numbers;
-	int		total;
 
 	if (ac >= 2)
 	{
-		stack_a = NULL;
-		stack_b = NULL;
-		numbers = NULL;
-		if (!init_numbers(ac, av, &numbers, &total) 
-			|| !init_stack(&stack_a, &stack_b, numbers, total))
+		stack_a = dlstnew(NULL, 0);
+		stack_b = dlstnew(NULL, 0);
+		total = 0;
+		if (!stack_a || !stack_b)
+			return (1);
+		if (!init_stack(ac, av, &stack_a, &total))
 			return (1);
 		ft_putstr("OK\n");
+		print_detail(stack_a, stack_b, total);
+		print_stack(stack_a, stack_b, total);
+		sa(stack_a);
+		print_detail(stack_a, stack_b, total);
+		print_stack(stack_a, stack_b, total);
+		pb(stack_a, stack_b);
+		print_detail(stack_a, stack_b, total);
 		print_stack(stack_a, stack_b, total);
 	}
 	return (0);
