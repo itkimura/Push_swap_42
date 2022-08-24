@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/22 11:44:17 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/24 16:12:19 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
  * return (1) = true
  *
 */
+int	error(void)
+{
+	ft_putstr("Error\n");
+	return (0);
+}
 
 int	is_valid_nb(char *str, int *i)
 {
@@ -35,7 +40,7 @@ int	is_valid_nb(char *str, int *i)
 	return (1);
 }
 
-int	is_valid_str(char *str, t_dlst **curr, int *count)
+int	is_valid_str(char *str, t_dlst **curr)
 {
 	int	i;
 	int	start;
@@ -46,10 +51,9 @@ int	is_valid_str(char *str, t_dlst **curr, int *count)
 		while (str[i] == ' ')
 			i++;
 		start = i;
-		printf("str[%d] = %c count = %d\n", i, str[i], *count);
 		if (!is_valid_nb(str, &i))
 			return (0);
-		if (!add_stack(&str[start], curr, count))
+		if (!add_stack(&str[start], curr))
 			return (0);
 		if (str[i])
 			i++;

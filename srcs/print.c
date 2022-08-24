@@ -47,22 +47,26 @@ void	print_detail(t_dlst *stack_a, t_dlst *stack_b)
 	}
 	printf("-------------\n");
 }
-void	print_stack(t_dlst *stack_a, t_dlst *stack_b, int total)
+void	print_stack(t_dlst *stack_a, t_dlst *stack_b)
 {
 	t_dlst *next_a;
 	t_dlst *next_b;
 	int i;
+	int total;
 	int max_digits = 0;
 
 	i = 0;
+	total = 0;
 	next_a = stack_a;
 	next_b = stack_b;
-	while (i <= total)
+	while (next_a)
 	{
 		next_a = next_a->next;
 		if (max_digits < number_of_digits(next_a->value))
 				max_digits = number_of_digits(next_a->value);
-		i++;
+		total++;
+		if (next_a == stack_a)
+			break ;
 	}
 	next_a = stack_a;
 	printf("print_stack:\n");
@@ -72,7 +76,6 @@ void	print_stack(t_dlst *stack_a, t_dlst *stack_b, int total)
 	for (int j = 0; j < max_digits + 2; j++)
 		printf("-");
 	printf("\n");
-	i = 0;
 	while (i <= total)
 	{
 		if (next_a && next_a->value)

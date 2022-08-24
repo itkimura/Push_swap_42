@@ -6,7 +6,7 @@
 #    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 11:55:29 by itkimura          #+#    #+#              #
-#    Updated: 2022/08/24 11:05:25 by itkimura         ###   ########.fr        #
+#    Updated: 2022/08/24 16:50:32 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,16 +16,17 @@ CHECKER = checker
 
 # GCC
 FLAGS = -Wall -Werror -Wextra
-INCL = -I ./includes/ -I./libft/includes/
+INCL = -I ./includes/ -I./libft/includes/ -I./libft/get_next_line/
 
 # DIRECTORIES
 SRCS_DIR = ./srcs/
 OBJS_DIR = ./objects/
 
 # FILES
-SRC_FILES =		push_swap.c		init_stack.c		validation.c	\
-				print.c			commands_a.c		commands_b.c
-CHECKER_FILES = checker.c
+SHARED = init_stack.c		validation.c	\
+		print.c			commands.c
+SRC_FILES =		push_swap.c $(SHARED)
+CHECKER_FILES = checker.c $(SHARED)
 SRCS		= $(addprefix	$(SRCS_DIR), $(SRC_FILES))
 OBJS		= $(addprefix	$(OBJS_DIR), $(SRC_FILES:.c=.o))
 CHECKER_OBJS		= $(addprefix	$(OBJS_DIR), $(CHECKER_FILES:.c=.o))
@@ -44,18 +45,6 @@ BOLD := $(shell tput bold)
 
 all: libft $(OBJS_DIR) $(NAME) $(CHECKER)
 
-help:
-	@echo "Usage: ${GREEN}make${RESET} ${BOLD}command${RESET} [options]\n"
-	@echo "Commands:\n"
-	@echo "  ${BOLD}make${RESET}\t\t\tcompile library, push_swap and checker"
-	@echo "  ${BOLD}make libft${RESET}\t\tcompile ./libft/libft.a"
-	@echo "  ${BOLD}make push_swap${RESET}\tcompile push_swap"
-	@echo "  ${BOLD}make checker${RESET}\t\tcompile checker"
-	@echo "  ${BOLD}make clean${RESET}\t\tdelete object files"
-	@echo "  ${BOLD}make fclean${RESET}\t\tdelete object files and all excutable files(libft, push_swap and checker)"
-	@echo "  ${BOLD}make re${RESET}\t\tdelete object files and all excutable files and compile all again"
-	@echo "  ${BOLD}help${RESET}\t\t\tprint this help message\n"
-
 libft: $(LIBFT)
 
 $(LIBFT):
@@ -66,14 +55,14 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-	@gcc $(FLAGS) $(INCL) -o $@ -c $<
+	gcc $(FLAGS) $(INCL) -o $@ -c $<
 
 $(NAME): $(OBJS_DIR) $(OBJS)
-	@gcc $(FLAGS) $(INCL) -o $@ $(OBJS) $(LIB)
+	gcc $(FLAGS) $(INCL) -o $@ $(OBJS) $(LIB)
 	@echo "${BOLD}[push_swap]${RESET}\tCompiled!"
 
 $(CHECKER): $(OBJS_DIR) $(CHECKER_OBJS) 
-	@gcc $(FLAGS) $(INCL) -o $@ $(CHECKER_OBJS) $(LIB)
+	gcc $(FLAGS) $(INCL) -o $@ $(CHECKER_OBJS) $(LIB)
 	@echo "${BOLD}[checker]${RESET}\tCompiled!"
 
 clean:
@@ -89,6 +78,18 @@ fclean:
 	@echo "${BOLD}[push_swap]${RESET}\tExcutable file has been deleted"
 
 re: fclean all
+
+help:
+	@echo "Usage: ${GREEN}make${RESET} ${BOLD}command${RESET} [options]\n"
+	@echo "Commands:\n"
+	@echo "  ${BOLD}make${RESET}\t\t\tcompile library, push_swap and checker"
+	@echo "  ${BOLD}make libft${RESET}\t\tcompile ./libft/libft.a"
+	@echo "  ${BOLD}make push_swap${RESET}\tcompile push_swap"
+	@echo "  ${BOLD}make checker${RESET}\t\tcompile checker"
+	@echo "  ${BOLD}make clean${RESET}\t\tdelete object files"
+	@echo "  ${BOLD}make fclean${RESET}\t\tdelete object files and all excutable files(libft, push_swap and checker)"
+	@echo "  ${BOLD}make re${RESET}\t\tdelete object files and all excutable files and compile all again"
+	@echo "  ${BOLD}help${RESET}\t\t\tprint this help message\n"
 
 .PHONY: all clean fclean re
 

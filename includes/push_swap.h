@@ -15,27 +15,36 @@ typedef	struct		s_dlst
 	struct s_dlst	*prev;
 }					t_dlst;
 
-/* push_swap.h */
-int	error(void);
+enum operations
+{
+	sa,
+	ra,
+	rra,
+	sb,
+	rb,
+	rrb,
+	ss,
+	rr,
+	rrr,
+	pa,
+	pb
+};
 
 /* validation.c */
+int	error(void);
 int	is_valid_nb(char *str, int *i);
-int	is_valid_str(char *str, t_dlst **curr, int *count);
+int	is_valid_str(char *str, t_dlst **curr);
 
 /* init_stack */
 t_dlst	*dlstnew(t_dlst *prev, int number);
-int	add_stack(char *str, t_dlst **curr, int *count);
-int	init_stack(int ac, char **av, t_dlst **stack_a, int *total);
+int	add_stack(char *str, t_dlst **curr);
+int	init_stack(int ac, char **av, t_dlst **stack_a);
 
-/* commands_a.c */
-int	sa(t_dlst *s);
-int	pa(t_dlst *a, t_dlst *b);
-
-/* commands_b.c */
-int	sb(t_dlst *s);
-int	pb(t_dlst *a, t_dlst *b);
+/* commands.c */
+int	swap(t_dlst *s);
+int	push(t_dlst *a, t_dlst *b);
 
 /*Delete later print.c*/
 void	print_detail(t_dlst *stack_a, t_dlst *stack_b);
-void	print_stack(t_dlst *stack_a, t_dlst *stack_b, int total);
+void	print_stack(t_dlst *stack_a, t_dlst *stack_b);
 #endif

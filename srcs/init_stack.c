@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/23 11:03:24 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/24 16:11:40 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,20 @@
  *
 */
 
-int	dublicate_check(int tmp, t_dlst **curr)
+int	dublicate_check(int nb, t_dlst **curr)
 {
-	t_dlst	*start;
+	t_dlst	*tmp;
 
-	start = *curr;
-	while (*curr)
+	tmp = *curr;
+	while (tmp->prev)
 	{
-		if (tmp == (*curr)->value)
+		if (nb == tmp->value)
 		{
 			printf("Duplication\n");
 			return (0);
 		}
-		*curr = (*curr)->prev;
+		tmp = tmp->prev;
 	}
-	*curr = start;
 	return (1);
 }
 
@@ -69,7 +68,7 @@ void	free_stack(t_dlst **stack)
 	*stack = NULL;
 }
 
-int	add_stack(char *str, t_dlst **curr, int *total)
+int	add_stack(char *str, t_dlst **curr)
 {
 	long int	tmp;
 	t_dlst		*new;
@@ -87,11 +86,10 @@ int	add_stack(char *str, t_dlst **curr, int *total)
 		return (0);
 	(*curr)->next = new;
 	(*curr) = (*curr)->next;
-	(*total)++;
 	return (1);
 }
 
-int	init_stack(int ac, char **av, t_dlst **stack_a, int *total)
+int	init_stack(int ac, char **av, t_dlst **stack_a)
 {
 	int		i;
 	t_dlst	*curr;
@@ -103,7 +101,7 @@ int	init_stack(int ac, char **av, t_dlst **stack_a, int *total)
 	curr = *stack_a;
 	while (i < ac)
 	{
-		if (!is_valid_str(av[i], &curr, total))
+		if (!is_valid_str(av[i], &curr))
 		{
 			free_stack(stack_a);
 			return (error());

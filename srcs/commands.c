@@ -1,19 +1,19 @@
 #include "push_swap.h"
 
-int	sa(t_dlst *a)
+int	swap(t_dlst *stack)
 {
 	int	tmp;
 
 	ft_putstr("sa\n");
-	if (a->next->next == a || a->next == NULL)
+	if (stack->next->next == stack || stack->next == NULL)
 		return (0);
-	tmp = a->next->value;
-	a->next->value = a->next->next->value;
-	a->next->next->value = tmp;
+	tmp = stack->next->value;
+	stack->next->value = stack->next->next->value;
+	stack->next->next->value = tmp;
 	return (1);
 }
 
-int	pa(t_dlst *a, t_dlst *b)
+int	push(t_dlst *a, t_dlst *b)
 {
 	t_dlst *tmp;
 
