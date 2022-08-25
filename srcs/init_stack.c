@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/24 16:11:40 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:22:05 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,6 @@
  * return (1) = true
  *
 */
-
-int	dublicate_check(int nb, t_dlst **curr)
-{
-	t_dlst	*tmp;
-
-	tmp = *curr;
-	while (tmp->prev)
-	{
-		if (nb == tmp->value)
-		{
-			printf("Duplication\n");
-			return (0);
-		}
-		tmp = tmp->prev;
-	}
-	return (1);
-}
 
 t_dlst	*dlstnew(t_dlst *prev, int number)
 {
@@ -48,24 +31,34 @@ t_dlst	*dlstnew(t_dlst *prev, int number)
 	return (new);
 }
 
+int	init_dlst(t_dlst **stack_a, t_dlst **stack_b)
+{
+	*stack_a = dlstnew(NULL, 0);
+	if (!*stack_a)
+		return (0);
+	*stack_b = dlstnew(NULL, 0);
+	if (!*stack_b)
+	{
+		free(*stack_a);
+		return (0);
+	}
+	(*stack_b)->next = *stack_b;
+	(*stack_b)->prev = *stack_b;
+	return (1);
+}
+
 void	free_stack(t_dlst **stack)
 {
-	int		i;
 	t_dlst	*tmp;
 	t_dlst	*next;
 
-	i = 0;
-	next = *stack;
-	tmp = *stack;
-	while (next)
+	next = (*stack)->next;
+	while (next != *stack)
 	{
-		next = (*stack)->next;
-		free(*stack);
-		*stack = next;
-		i++;
+		tmp = next->next;
+		free(next);
+		next = tmp;
 	}
-	*stack = tmp;
-	*stack = NULL;
 }
 
 int	add_stack(char *str, t_dlst **curr)
@@ -95,9 +88,6 @@ int	init_stack(int ac, char **av, t_dlst **stack_a)
 	t_dlst	*curr;
 
 	i = 1;
-	*stack_a = dlstnew(NULL, 0);
-	if (!*stack_a)
-		return (error());
 	curr = *stack_a;
 	while (i < ac)
 	{

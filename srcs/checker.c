@@ -6,45 +6,18 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/24 17:31:59 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:19:45 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	get_index(char *input)
-{
-	int		i;
-	char	**str;
-
-
-	i = 0;
-	str = (char *[]){"sa", "ra", "rra", "sb", "rb", "rrb",
-					 "ss", "rr", "rrr", "pa", "pb"};
-	while (i < 11)
-	{
-		if (!ft_strcmp(str[i], input))
-			break ;
-		i++;
-	}
-	return (i);
-}
-
-int	apply_op(int index, t_dlst *stack_a, t_dlst *stack_b)
-{
-	if (index == sa)
-		return (swap(stack_a));
-	if (index == sb)
-		return (swap(stack_b));
-	return (0);
-}
 
 int	check_sort(t_dlst *a, t_dlst *b)
 {
 	t_dlst *tmp;
 
 	tmp = a->next;
-	if (b->next != NULL)
+	if (b->next != b)
 		return (0);
 	while (tmp != a)
 	{
@@ -57,17 +30,15 @@ int	check_sort(t_dlst *a, t_dlst *b)
 
 int	main(int ac, char **av)
 {
-	int total;
 	t_dlst	*stack_a;
 	t_dlst	*stack_b;
 	char	*input;
 
 	if (ac >= 2)
 	{
-		stack_a = dlstnew(NULL, 0);
-		stack_b = dlstnew(NULL, 0);
-		total = 0;
-		if (!stack_a || !stack_b)
+		stack_a = NULL;
+		stack_b = NULL;
+		if (!init_dlst(&stack_a, &stack_b))
 			return (1);
 		if (!init_stack(ac, av, &stack_a))
 			return (1);
@@ -75,14 +46,23 @@ int	main(int ac, char **av)
 		print_stack(stack_a, stack_b);
 		while (get_next_line(0, &input))
 		{
-			printf("input = %s\n", input);
-			apply_op(get_index(input), stack_a, stack_b);
+			if (!ft_strcmp(input, "detail"))
+				print_detail(stack_a, stack_b);
+			free(input);
+			if (!apply_op(input, stack_a, stack_b))
+			{
+				error();
+				return (1);
+			}
 			print_stack(stack_a, stack_b);
 		}
 		if(!check_sort(stack_a, stack_b))
 			ft_putstr("KO\n");
 		else
 			ft_putstr("OK\n");
+		free_stack(&stack_a);
+		free_stack(&stack_b);
 	}
+		system("leaks checker");
 	return (0);
 }

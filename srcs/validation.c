@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/24 16:12:19 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/25 11:30:02 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,23 @@ int	error(void)
 {
 	ft_putstr("Error\n");
 	return (0);
+}
+
+int	dublicate_check(int nb, t_dlst **curr)
+{
+	t_dlst	*tmp;
+
+	tmp = *curr;
+	while (tmp->prev)
+	{
+		if (nb == tmp->value)
+		{
+			printf("Duplication\n");
+			return (0);
+		}
+		tmp = tmp->prev;
+	}
+	return (1);
 }
 
 int	is_valid_nb(char *str, int *i)

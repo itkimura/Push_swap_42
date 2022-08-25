@@ -25,7 +25,7 @@ void	print_detail(t_dlst *stack_a, t_dlst *stack_b)
 	{
 		if (next_a)
 		{
-			printf("No.%5d:%15p\tvalue:%10d\tprev:%15p\tnext:%15p\n", i, next_a,  next_a->value, next_a->prev, next_a->next);
+			printf("No.%5d:%15p\tvalue:%10d\tprev:%15p\tnext:%15p[%d]\n", i, next_a,  next_a->value, next_a->prev, next_a->next, next_a->next->value);
 			next_a = next_a->next;
 		}
 		i++;
@@ -38,7 +38,7 @@ void	print_detail(t_dlst *stack_a, t_dlst *stack_b)
 	{
 		if (next_b)
 		{
-			printf("No.%5d:%15p\tvalue:%10d\tprev:%15p\tnext:%15p\n", i, next_b,  next_b->value, next_b->prev, next_b->next);
+			printf("No.%5d:%15p\tvalue:%10d\tprev:%15p\tnext:%15p[%d]\n", i, next_b,  next_b->value, next_b->prev, next_b->next, next_b->next->value);
 			next_b = next_b->next;
 		}
 		i++;
@@ -47,6 +47,7 @@ void	print_detail(t_dlst *stack_a, t_dlst *stack_b)
 	}
 	printf("-------------\n");
 }
+
 void	print_stack(t_dlst *stack_a, t_dlst *stack_b)
 {
 	t_dlst *next_a;
@@ -62,13 +63,21 @@ void	print_stack(t_dlst *stack_a, t_dlst *stack_b)
 	while (next_a)
 	{
 		next_a = next_a->next;
+		total++;
 		if (max_digits < number_of_digits(next_a->value))
 				max_digits = number_of_digits(next_a->value);
-		total++;
 		if (next_a == stack_a)
 			break ;
 	}
+	while(next_b)
+	{
+		next_b = next_b->next;
+		if (next_b == stack_b)
+			break ;
+		total++;
+	}
 	next_a = stack_a;
+	next_b = stack_b;
 	printf("print_stack:\n");
 	for (int j = 0; j < max_digits + 2; j++)
 		printf("-");
@@ -76,7 +85,7 @@ void	print_stack(t_dlst *stack_a, t_dlst *stack_b)
 	for (int j = 0; j < max_digits + 2; j++)
 		printf("-");
 	printf("\n");
-	while (i <= total)
+	while (i < total)
 	{
 		if (next_a && next_a->value)
 		{
