@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/25 11:30:02 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/29 11:14:43 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,22 @@ int	error(void)
 {
 	ft_putstr("Error\n");
 	return (0);
+}
+
+int	is_sorted(t_dlst *a, t_dlst *b)
+{
+	t_dlst	*tmp;
+
+	tmp = a->next;
+	if (b->next != b)
+		return (0);
+	while (tmp != a)
+	{
+		if (tmp->value > tmp->next->value && tmp->next != a)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }
 
 int	dublicate_check(int nb, t_dlst **curr)
@@ -57,7 +73,7 @@ int	is_valid_nb(char *str, int *i)
 	return (1);
 }
 
-int	is_valid_str(char *str, t_dlst **curr)
+int	is_valid_str(char *str, t_dlst **curr, int *total)
 {
 	int	i;
 	int	start;
@@ -70,7 +86,7 @@ int	is_valid_str(char *str, t_dlst **curr)
 		start = i;
 		if (!is_valid_nb(str, &i))
 			return (0);
-		if (!add_stack(&str[start], curr))
+		if (!add_stack(&str[start], curr, total))
 			return (0);
 		if (str[i])
 			i++;

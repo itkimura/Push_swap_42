@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/25 16:22:05 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/29 10:59:35 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	free_stack(t_dlst **stack)
 	}
 }
 
-int	add_stack(char *str, t_dlst **curr)
+int	add_stack(char *str, t_dlst **curr, int *total)
 {
 	long int	tmp;
 	t_dlst		*new;
@@ -79,10 +79,11 @@ int	add_stack(char *str, t_dlst **curr)
 		return (0);
 	(*curr)->next = new;
 	(*curr) = (*curr)->next;
+	(*total)++;
 	return (1);
 }
 
-int	init_stack(int ac, char **av, t_dlst **stack_a)
+int	init_stack(int ac, char **av, t_dlst **stack_a, int *total)
 {
 	int		i;
 	t_dlst	*curr;
@@ -91,7 +92,7 @@ int	init_stack(int ac, char **av, t_dlst **stack_a)
 	curr = *stack_a;
 	while (i < ac)
 	{
-		if (!is_valid_str(av[i], &curr))
+		if (!is_valid_str(av[i], &curr, total))
 		{
 			free_stack(stack_a);
 			return (error());

@@ -2,9 +2,10 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
+# include <stdbool.h>
 # include <limits.h>
 # include "libft.h"
-
+# define SORTLIMIT 30
 /*Delete later*/
 # include <stdio.h>
 
@@ -15,19 +16,39 @@ typedef	struct		s_dlst
 	struct s_dlst	*prev;
 }					t_dlst;
 
+typedef	struct	s_sort
+{
+	int			max;
+	int		tmp[SORTLIMIT + 10];
+	int		ans[SORTLIMIT + 10];
+}				t_sort;
+
+enum ops{
+	sa,
+	sb,
+	ss,
+	pa,
+	pb,
+	ra,
+	rb,
+	rr,
+	rra,
+	rrb,
+	rrr
+};
 
 /* validation.c */
 int	error(void);
 int	dublicate_check(int nb, t_dlst **curr);
 int	is_valid_nb(char *str, int *i);
-int	is_valid_str(char *str, t_dlst **curr);
+int	is_valid_str(char *str, t_dlst **curr, int *total);
 
 /* init_stack */
 t_dlst	*dlstnew(t_dlst *prev, int number);
 int	init_dlst(t_dlst **stack_a, t_dlst **stack_b);
-int	add_stack(char *str, t_dlst **curr);
+int	add_stack(char *str, t_dlst **curr, int *total);
 void	free_stack(t_dlst **stack);
-int	init_stack(int ac, char **av, t_dlst **stack_a);
+int	init_stack(int ac, char **av, t_dlst **stack_a, int *total);
 
 /* operations.c */
 int	swap(t_dlst *s);
@@ -36,8 +57,17 @@ int	rotate(t_dlst *stack);
 int	reverse(t_dlst *stack);
 
 /* apply_operations.c */
-//int	get_index(char *input);
-int	apply_op(char *input, t_dlst *stack_a, t_dlst *stack_b);
+int	get_index(char *input);
+bool	sort_dlst(t_dlst *stack_a, t_dlst *stack_b, int index, bool recover);
+int	recover_dlst(t_dlst *stack_a, t_dlst *stack_b, int index);
+int	apply_op(int index, t_dlst *stack_a, t_dlst *stack_b);
+
+/* small_sort.c */
+int	small_sort(t_dlst *a, t_dlst *b, int total);
+void	dfs(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int turn);
+
+/* checker.c */
+int	is_sorted(t_dlst *a, t_dlst *b);
 
 /*Delete later print.c*/
 void	print_detail(t_dlst *stack_a, t_dlst *stack_b);
