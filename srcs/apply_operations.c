@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   apply_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/29 17:03:29 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/29 21:45:47 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,33 @@ int	get_index(char *input)
 	return (i);
 }
 
+bool	avoid_check(int ops, t_sort *t)
+{
+	if (ops == sa && (t->prev == sa || t->prev == sb || t->prev == ss))
+		return (true);
+	if (ops == sb && (t->prev == sa || t->prev == sb || t->prev == ss))
+		return (true);
+	if (ops == ss && (t->prev == sa || t->prev == sb || t->prev == ss))
+		return (true);
+	if (ops == pa && (t->prev == pb))
+		return (true);
+	if (ops == pb && (t->prev == pa))
+		return (true);
+	if (ops == ra && (t->prev == rra || t->prev == rrr))
+		return (true);
+	if (ops == rb && (t->prev == rrb || t->prev == rrr))
+		return (true);
+	if (ops == rr && (t->prev == rra || t->prev == rrb || t->prev == rrr))
+		return (true);
+	if (ops == rra && (t->prev == ra || t->prev == rr))
+		return (true);
+	if (ops == rrb && (t->prev == rb || t->prev == rr))
+		return (true);
+	if (ops == rrr && (t->prev == ra || t->prev == rb || t->prev == rr))
+		return (true);
+	return (false);
+}
+
 int	recover_dlst(t_dlst *stack_a, t_dlst *stack_b, int index)
 {
 	if (index == sa)
@@ -39,7 +66,7 @@ int	recover_dlst(t_dlst *stack_a, t_dlst *stack_b, int index)
 	if (index == ss)
 		return (swap(stack_a) + swap(stack_b));
 	if (index == pa)
-		return (push(stack_a, stack_a));
+		return (push(stack_a, stack_b));
 	if (index == pb)
 		return (push(stack_b, stack_a));
 	if (index == ra)

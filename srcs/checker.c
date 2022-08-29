@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/29 17:04:33 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/29 22:03:19 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ int	main(int ac, char **av)
 		free_stack(&stack_a);
 		free_stack(&stack_b);
 	}
-	system("leaks checker");
+//	system("leaks checker");
 	return (0);
 }

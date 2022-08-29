@@ -3,6 +3,8 @@
 int		number_of_digits(int nb)
 {
 	int digit = 0;
+	if (nb == 0)
+		return (1);
 	while (nb)
 	{
 		nb = nb / 10;
@@ -87,7 +89,7 @@ void	print_stack(t_dlst *stack_a, t_dlst *stack_b)
 	printf("\n");
 	while (i < total)
 	{
-		if (next_a && next_a->value)
+		if (next_a != stack_a)
 		{
 			for (int j = 0; j < max_digits + 2 - number_of_digits(next_a->value) ; j++)
 				printf(" ");

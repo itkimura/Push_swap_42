@@ -19,22 +19,23 @@ typedef	struct		s_dlst
 typedef	struct	s_sort
 {
 	int			max;
+	int			prev;
 	int		tmp[SORTLIMIT + 10];
 	int		ans[SORTLIMIT + 10];
 }				t_sort;
 
 enum ops{
-	sa,
-	sb,
-	ss,
-	pa,
-	pb,
-	ra,
-	rb,
-	rr,
-	rra,
-	rrb,
-	rrr
+	sa, //0
+	sb, //1
+	ss, //2
+	pa, //3
+	pb, //4
+	ra, //5
+	rb, //6
+	rr, //7
+	rra,//8
+	rrb, //9
+	rrr //10
 };
 
 /* validation.c */
@@ -57,6 +58,7 @@ int	rotate(t_dlst *stack);
 int	reverse(t_dlst *stack);
 
 /* apply_operations.c */
+bool	avoid_check(int ops, t_sort *t);
 int	get_index(char *input);
 bool	sort_dlst(t_dlst *stack_a, t_dlst *stack_b, int index, bool recover);
 int	recover_dlst(t_dlst *stack_a, t_dlst *stack_b, int index);
@@ -68,6 +70,8 @@ void	dfs(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int turn);
 
 /* checker.c */
 int	is_sorted(t_dlst *a, t_dlst *b);
+/* push_swap.c */
+void	print_pos(int index);
 
 /*Delete later print.c*/
 void	print_detail(t_dlst *stack_a, t_dlst *stack_b);

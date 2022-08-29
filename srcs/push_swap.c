@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/29 17:02:02 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/29 21:49:29 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	init_ans(t_sort **t)
 	if (!new)
 		return (0);
 	new->max = SORTLIMIT;
+	new->prev = -1;
 	ft_memset(new->tmp, -1, sizeof(new->tmp));
 	ft_memset(new->ans, -1, sizeof(new->ans));
 	*t = new;
@@ -37,14 +38,34 @@ void	print_pos(int index)
 {
 	if (index == sa)
 		ft_putstr("sa\n");
+	if (index == sb)
+		ft_putstr("sb\n");
+	if (index == ss)
+		ft_putstr("ss\n");
+	if (index == pa)
+		ft_putstr("pa\n");
+	if (index == pa)
+		ft_putstr("pb\n");
+	if (index == ra)
+		ft_putstr("ra\n");
+	if (index == rb)
+		ft_putstr("rb\n");
+	if (index == rr)
+		ft_putstr("rr\n");
+	if (index == rra)
+		ft_putstr("rra\n");
+	if (index == rrb)
+		ft_putstr("rrb\n");
+	if (index == rrr)
+		ft_putstr("rrr\n");
 }
 
 void print_ans(t_sort *t)
 {
 	int	i;
 
-	printf("print_ans here!\n");
 	i = 0;
+	printf("-- Final answer --\n");
 	while (i < t->max)
 		print_pos(t->ans[i++]);
 }
@@ -84,6 +105,6 @@ int	main(int ac, char **av)
 		free_stack(&stack_b);
 		free(t);
 	}
-	system("leaks push_swap");
+	//system("leaks push_swap");
 	return (0);
 }
