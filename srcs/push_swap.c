@@ -6,18 +6,12 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/29 21:49:29 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/30 14:26:06 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
- * Insid of mail function:
- * return (0) = successfully
- * return (1) = Error
- * 
-*/
 
 int	init_ans(t_sort **t)
 {
@@ -34,43 +28,21 @@ int	init_ans(t_sort **t)
 	return (1);
 }
 
-void	print_pos(int index)
+void	free_all(t_dlst **stack_a, t_dlst **stack_b, t_sort *t)
 {
-	if (index == sa)
-		ft_putstr("sa\n");
-	if (index == sb)
-		ft_putstr("sb\n");
-	if (index == ss)
-		ft_putstr("ss\n");
-	if (index == pa)
-		ft_putstr("pa\n");
-	if (index == pa)
-		ft_putstr("pb\n");
-	if (index == ra)
-		ft_putstr("ra\n");
-	if (index == rb)
-		ft_putstr("rb\n");
-	if (index == rr)
-		ft_putstr("rr\n");
-	if (index == rra)
-		ft_putstr("rra\n");
-	if (index == rrb)
-		ft_putstr("rrb\n");
-	if (index == rrr)
-		ft_putstr("rrr\n");
+	free_stack(stack_a);
+	free_stack(stack_b);
+	free(t);
 }
 
-void print_ans(t_sort *t)
-{
-	int	i;
+/*
+ * init_dlst -> malloc stacks
+ * init_stack -> validation & initialise stack
+ * init_ans -> malloc sorting struct
+ * 
+*/
 
-	i = 0;
-	printf("-- Final answer --\n");
-	while (i < t->max)
-		print_pos(t->ans[i++]);
-}
-
-int	main(int ac, char **av)
+int	push_swap(int ac, char **av)
 {
 	t_dlst	*stack_a;
 	t_dlst	*stack_b;
@@ -78,33 +50,37 @@ int	main(int ac, char **av)
 	int		total;
 	int		turn;
 
+	stack_a = NULL;
+	stack_b = NULL;
+	t = NULL;
+	total = 0;
+	turn = 0;
+	if (!init_dlst(&stack_a, &stack_b))
+		return (0);
+	if (!init_stack(ac, av, &stack_a, &total))
+		return (0);
+	if (!init_ans(&t))
+		return (0);
+	dfs(stack_a, stack_b, t, turn);
+	print_ans(t);
+	free_all(&stack_a, &stack_b, t);
+	return (1);
+}
+
+/*
+ * Inside of main function:
+ * return (0) = successfully
+ * return (1) = Error
+*/
+
+int	main(int ac, char **av)
+{
+
 	if (ac >= 2)
 	{
-		stack_a = NULL;
-		stack_b = NULL;
-		t = NULL;
-		total = 0;
-		turn = 0;
-		if (!init_dlst(&stack_a, &stack_b))
+		if (!push_swap(ac, av))
 			return (1);
-		if (!init_stack(ac, av, &stack_a, &total))
-			return (1);
-		if (!init_ans(&t))
-			return (1);
-		print_detail(stack_a, stack_b);
-		print_stack(stack_a, stack_b);
-/*
-		if (!small_sort(stack_a, stack_b, total))
-			ft_putstr("OK\n");
-		else
-			ft_putstr("KO\n");
-*/
-		dfs(stack_a, stack_b, t, turn);
-		print_ans(t);
-		free_stack(&stack_a);
-		free_stack(&stack_b);
-		free(t);
 	}
-	//system("leaks push_swap");
+	system("leaks push_swap");
 	return (0);
 }

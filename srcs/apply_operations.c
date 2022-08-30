@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/29 21:45:47 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/30 10:55:37 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ bool	avoid_check(int ops, t_sort *t)
 int	recover_dlst(t_dlst *stack_a, t_dlst *stack_b, int index)
 {
 	if (index == sa)
-		return (swap(stack_b));
-	if (index == sb)
 		return (swap(stack_a));
+	if (index == sb)
+		return (swap(stack_b));
 	if (index == ss)
 		return (swap(stack_a) + swap(stack_b));
 	if (index == pa)

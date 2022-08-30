@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/29 22:03:19 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/08/30 14:07:53 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@ int	main(int ac, char **av)
 			return (1);
 		if (!init_stack(ac, av, &stack_a, &total))
 			return (1);
-		print_detail(stack_a, stack_b);
-		print_stack(stack_a, stack_b);
+//		print_detail(stack_a, stack_b);
+//		print_stack(stack_a, stack_b);
 		while (get_next_line(0, &input))
 		{
 			if (!ft_strcmp(input, "detail"))
-				print_detail(stack_a, stack_b);
+//				print_detail(stack_a, stack_b);
 			free(input);
 			index = get_index(input);
+			print_operations(index);
 			if (index > rrr)
 			{
 				error();
@@ -44,10 +45,9 @@ int	main(int ac, char **av)
 			}
 			else
 			{
-				printf("index = %d\n", index);
 				apply_op(index, stack_a, stack_b);
 			}
-			print_stack(stack_a, stack_b);
+//			print_stack(stack_a, stack_b);
 		}
 		if (!is_sorted(stack_a, stack_b))
 			ft_putstr("KO\n");

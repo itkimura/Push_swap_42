@@ -6,6 +6,7 @@
 # include <limits.h>
 # include "libft.h"
 # define SORTLIMIT 30
+
 /*Delete later*/
 # include <stdio.h>
 
@@ -39,7 +40,7 @@ enum ops{
 };
 
 /* validation.c */
-int	error(void);
+void	error(void);
 int	dublicate_check(int nb, t_dlst **curr);
 int	is_valid_nb(char *str, int *i);
 int	is_valid_str(char *str, t_dlst **curr, int *total);
@@ -70,8 +71,10 @@ void	dfs(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int turn);
 
 /* checker.c */
 int	is_sorted(t_dlst *a, t_dlst *b);
-/* push_swap.c */
-void	print_pos(int index);
+
+/* push_answer.c */
+void	print_operations(int index);
+void print_ans(t_sort *t);
 
 /*Delete later print.c*/
 void	print_detail(t_dlst *stack_a, t_dlst *stack_b);

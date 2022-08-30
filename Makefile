@@ -6,7 +6,7 @@
 #    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 11:55:29 by itkimura          #+#    #+#              #
-#    Updated: 2022/08/29 11:11:50 by itkimura         ###   ########.fr        #
+#    Updated: 2022/08/30 13:36:02 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ SRCS_DIR = ./srcs/
 OBJS_DIR = ./objects/
 
 # FILES
-SHARED =	init_stack.c		validation.c		operations.c \
-			apply_operations.c	print.c
+SHARED =	init_stack.c		validation.c	operations.c	\
+			apply_operations.c	print.c			print_answer.c	
 SRC_FILES =		push_swap.c		small_sort.c		$(SHARED)
 CHECKER_FILES = checker.c $(SHARED)
 SRCS		= $(addprefix	$(SRCS_DIR), $(SRC_FILES))
