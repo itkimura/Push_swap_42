@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/01 22:58:56 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/01 23:53:23 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	v_stack(t_dlst *stack_a, t_dlst *stack_b)
 			ft_printf("%15c\n", ' ');
 		if (next_b != stack_b)
 			next_b = next_b->next;
+		if (next_a == stack_a)
+			ft_printf("---------------------------------\n");
 		usleep(200000);
 	}
 }
@@ -71,10 +73,9 @@ void	visualizer(t_dlst *stack_a, t_dlst *stack_b, char *input)
 		count++;
 	ft_printf("      input [%5s]  count[%5d]\n", input, count);
 	ft_printf("---------------------------------\n");
-	ft_printf("%15s | %15s\n", "Stack A", "Stack B");
+	ft_printf("%15s | %-15s\n", "Stack A", "Stack B");
 	ft_printf("---------------------------------\n");
 	v_stack(stack_a, stack_b);
-	ft_printf("---------------------------------\n");
 }
 
 int checker(t_dlst *stack_a, t_dlst *stack_b, int v)
