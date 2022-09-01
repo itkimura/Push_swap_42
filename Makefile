@@ -6,7 +6,7 @@
 #    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 11:55:29 by itkimura          #+#    #+#              #
-#    Updated: 2022/08/30 13:36:02 by itkimura         ###   ########.fr        #
+#    Updated: 2022/09/01 13:12:32 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CHECKER = checker
 
 # GCC
 FLAGS = -Wall -Werror -Wextra
-INCL = -I ./includes/ -I./libft/includes/ -I./libft/get_next_line/
+INCL = -I./includes/ -I./libft/includes/
 
 # DIRECTORIES
 SRCS_DIR = ./srcs/

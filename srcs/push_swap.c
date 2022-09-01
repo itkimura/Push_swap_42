@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/30 14:26:06 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/01 22:25:00 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	push_swap(int ac, char **av)
 		return (0);
 	if (!init_ans(&t))
 		return (0);
+//	print_detail(stack_a, stack_b);
+//	print_stack(stack_a, stack_b);
 	dfs(stack_a, stack_b, t, turn);
 	print_ans(t);
 	free_all(&stack_a, &stack_b, t);
@@ -81,6 +83,6 @@ int	main(int ac, char **av)
 		if (!push_swap(ac, av))
 			return (1);
 	}
-	system("leaks push_swap");
+//	system("leaks push_swap");
 	return (0);
 }
