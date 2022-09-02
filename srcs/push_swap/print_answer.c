@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/30 10:50:15 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/02 18:10:22 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,11 @@ void	print_operations(int index)
 		printf("rrr\n");
 }
 
-void print_ans(t_sort *t)
+void	print_ans(t_sort *t)
 {
 	int	i;
 
 	i = 0;
-//	printf("-- Final answer --\n");
 	while (i < t->max)
 		print_operations(t->ans[i++]);
 }

@@ -6,7 +6,7 @@
 #    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 11:55:29 by itkimura          #+#    #+#              #
-#    Updated: 2022/09/01 13:12:32 by itkimura         ###   ########.fr        #
+#    Updated: 2022/09/02 18:36:19 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,17 +19,22 @@ FLAGS = -Wall -Werror -Wextra
 INCL = -I./includes/ -I./libft/includes/
 
 # DIRECTORIES
-SRCS_DIR = ./srcs/
+SHARED_DIR = ./srcs/shared/
+PUSH_DIR = ./srcs/push_swap/
+CHECKER_DIR = ./srcs/checker/
+VISUAL_DIR = ./srcs/visualizer/
 OBJS_DIR = ./objects/
 
 # FILES
-SHARED =	init_stack.c		validation.c	operations.c	\
-			apply_operations.c	print.c			print_answer.c	
-SRC_FILES =		push_swap.c		small_sort.c		$(SHARED)
-CHECKER_FILES = checker.c $(SHARED)
-SRCS		= $(addprefix	$(SRCS_DIR), $(SRC_FILES))
-OBJS		= $(addprefix	$(OBJS_DIR), $(SRC_FILES:.c=.o))
-CHECKER_OBJS		= $(addprefix	$(OBJS_DIR), $(CHECKER_FILES:.c=.o))
+SHARED_FILES	=	validation.c	init_stack.c	operations.c	\
+					apply_operations.c	print.c
+PUSH_FILES		=	push_swap.c		dfs.c		print_answer.c
+CHECKER_FILES 	= checker.c
+VISUAL_FILES 	= visualizer.c
+SHARED_OBJS		= $(addprefix	$(OBJS_DIR), $(SHARED_FILES:.c=.o))
+PUSH_OBJS			= $(addprefix	$(OBJS_DIR), $(PUSH_FILES:.c=.o))
+CHECKER_OBJS	= $(addprefix	$(OBJS_DIR), $(CHECKER_FILES:.c=.o))
+VISUAL_OBJS		= $(addprefix	$(OBJS_DIR), $(VISUAL_FILES:.c=.o))
 
 # LIBFT
 LIB = -L./libft/ -lft
@@ -54,15 +59,26 @@ $(LIBFT):
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
+$(OBJS_DIR)%.o: $(PUSH_DIR)%.c
 	gcc $(FLAGS) $(INCL) -o $@ -c $<
 
-$(NAME): $(OBJS_DIR) $(OBJS)
-	gcc $(FLAGS) $(INCL) -o $@ $(OBJS) $(LIB)
+$(OBJS_DIR)%.o: $(SHARED_DIR)%.c
+	gcc $(FLAGS) $(INCL) -o $@ -c $<
+
+$(OBJS_DIR)%.o: $(CHECKER_DIR)%.c
+	echo "checker objs"
+	gcc $(FLAGS) $(INCL) -o $@ -c $<
+
+$(OBJS_DIR)%.o: $(VISUAL_DIR)%.c
+	echo "visual objs"
+	gcc $(FLAGS) $(INCL) -o $@ -c $<
+
+$(NAME): $(OBJS_DIR) $(SHARED_OBJS) $(PUSH_OBJS)
+	gcc $(FLAGS) $(INCL) -o $@ $(PUSH_OBJS) $(SHARED_OBJS) $(LIB)
 	@echo "${BOLD}[push_swap]${RESET}\tCompiled!"
 
-$(CHECKER): $(OBJS_DIR) $(CHECKER_OBJS) 
-	gcc $(FLAGS) $(INCL) -o $@ $(CHECKER_OBJS) $(LIB)
+$(CHECKER): $(CHECKER_OBJS) $(SHARED_OBJS) $(VISUAL_OBJS)
+	gcc $(FLAGS) $(INCL) -o $@ $(CHECKER_OBJS) $(SHARED_OBJS) $(VISUAL_OBJS) $(LIB)
 	@echo "${BOLD}[checker]${RESET}\tCompiled!"
 
 clean:

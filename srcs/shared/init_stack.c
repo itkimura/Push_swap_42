@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/01 15:10:30 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/02 18:13:15 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ int	init_stack(int ac, char **av, t_dlst **stack_a, int *total)
 		if (!ft_strcmp(av[i], "-v") && !ft_strcmp(av[0], "./checker"))
 		{
 			i++;
-			continue;
+			continue ;
 		}
-		if(!is_valid_str(av[i], &curr, total))
+		if (!is_valid_str(av[i], &curr, total))
 		{
 			free_stack(stack_a);
 			error();

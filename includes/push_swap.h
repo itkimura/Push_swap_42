@@ -41,6 +41,15 @@ enum ops{
 	rrr //10
 };
 
+/* push_swap */
+/* dfs.c */
+void	dfs(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int turn);
+
+/* push_answer.c */
+void	print_operations(int index);
+void print_ans(t_sort *t);
+
+/* shared */
 /* validation.c */
 void	error(void);
 int	dublicate_check(int nb, t_dlst **curr);
@@ -67,16 +76,12 @@ bool	sort_dlst(t_dlst *stack_a, t_dlst *stack_b, int index, bool recover);
 int	recover_dlst(t_dlst *stack_a, t_dlst *stack_b, int index);
 int	apply_op(int index, t_dlst *stack_a, t_dlst *stack_b);
 
-/* small_sort.c */
-int	small_sort(t_dlst *a, t_dlst *b, int total);
-void	dfs(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int turn);
-
-/* checker.c */
+/* checker */
 int	is_sorted(t_dlst *a, t_dlst *b);
 
-/* push_answer.c */
-void	print_operations(int index);
-void print_ans(t_sort *t);
+/* visualizer */
+void	v_stack(t_dlst *stack_a, t_dlst *stack_b);
+void	visualizer(t_dlst *stack_a, t_dlst *stack_b, char *input);
 
 /*Delete later print.c*/
 void	print_detail(t_dlst *stack_a, t_dlst *stack_b);

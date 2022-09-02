@@ -6,16 +6,15 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/01 22:25:00 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/02 18:11:03 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
 int	init_ans(t_sort **t)
 {
-	t_sort *new;
+	t_sort	*new;
 
 	new = (t_sort *)malloc(sizeof(t_sort));
 	if (!new)
@@ -61,8 +60,6 @@ int	push_swap(int ac, char **av)
 		return (0);
 	if (!init_ans(&t))
 		return (0);
-//	print_detail(stack_a, stack_b);
-//	print_stack(stack_a, stack_b);
 	dfs(stack_a, stack_b, t, turn);
 	print_ans(t);
 	free_all(&stack_a, &stack_b, t);
@@ -77,7 +74,6 @@ int	push_swap(int ac, char **av)
 
 int	main(int ac, char **av)
 {
-
 	if (ac >= 2)
 	{
 		if (!push_swap(ac, av))

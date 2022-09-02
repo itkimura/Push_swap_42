@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/30 10:55:37 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/02 18:14:20 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ int	get_index(char *input)
 	int		i;
 	char	**str;
 
-
 	i = 0;
 	str = (char *[]){"sa", "sb", "ss", "pa", "pb", "ra",
-					 "rb", "rr", "rra", "rrb", "rrr"};
+		"rb", "rr", "rra", "rrb", "rrr"};
 	while (i < 11)
 	{
 		if (!ft_strcmp(str[i], input))
