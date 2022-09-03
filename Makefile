@@ -6,29 +6,29 @@
 #    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 11:55:29 by itkimura          #+#    #+#              #
-#    Updated: 2022/09/02 18:36:19 by itkimura         ###   ########.fr        #
+#    Updated: 2022/09/03 12:07:00 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # TARGET
-NAME = push_swap
-CHECKER = checker
+NAME			= push_swap
+CHECKER			= checker
 
 # GCC
-FLAGS = -Wall -Werror -Wextra
-INCL = -I./includes/ -I./libft/includes/
+FLAGS			= -Wall -Werror -Wextra
+INCL			= -I./includes/ -I./libft/includes/
 
 # DIRECTORIES
-SHARED_DIR = ./srcs/shared/
-PUSH_DIR = ./srcs/push_swap/
-CHECKER_DIR = ./srcs/checker/
-VISUAL_DIR = ./srcs/visualizer/
-OBJS_DIR = ./objects/
+SHARED_DIR		= ./srcs/shared/
+PUSH_DIR		= ./srcs/push_swap/
+CHECKER_DIR		= ./srcs/checker/
+VISUAL_DIR		= ./srcs/visualizer/
+OBJS_DIR		= ./objects/
 
 # FILES
-SHARED_FILES	=	validation.c	init_stack.c	operations.c	\
-					apply_operations.c	print.c
-PUSH_FILES		=	push_swap.c		dfs.c		print_answer.c
+SHARED_FILES	= validation.c	init_stack.c	operations.c	\
+				  apply_operations.c	print.c
+PUSH_FILES		= push_swap.c		dfs.c		print_answer.c
 CHECKER_FILES 	= checker.c
 VISUAL_FILES 	= visualizer.c
 SHARED_OBJS		= $(addprefix	$(OBJS_DIR), $(SHARED_FILES:.c=.o))
@@ -37,15 +37,15 @@ CHECKER_OBJS	= $(addprefix	$(OBJS_DIR), $(CHECKER_FILES:.c=.o))
 VISUAL_OBJS		= $(addprefix	$(OBJS_DIR), $(VISUAL_FILES:.c=.o))
 
 # LIBFT
-LIB = -L./libft/ -lft
-LIBFT = /libft/libft.a
+LIB				= -L./libft/ -lft
+LIBFT			= /libft/libft.a
 
 # COLORS
-GREEN  := $(shell tput -Txterm setaf 2)
-YELLOW := $(shell tput -Txterm setaf 3)
-WHITE  := $(shell tput -Txterm setaf 7)
-RESET  := $(shell tput -Txterm sgr0)
-BOLD := $(shell tput bold)
+GREEN			:= $(shell tput -Txterm setaf 2)
+YELLOW			:= $(shell tput -Txterm setaf 3)
+WHITE			:= $(shell tput -Txterm setaf 7)
+RESET			:= $(shell tput -Txterm sgr0)
+BOLD			:= $(shell tput bold)
 
 
 all: libft $(OBJS_DIR) $(NAME) $(CHECKER)
@@ -60,31 +60,30 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)%.o: $(PUSH_DIR)%.c
-	gcc $(FLAGS) $(INCL) -o $@ -c $<
+	@gcc $(FLAGS) $(INCL) -o $@ -c $<
 
 $(OBJS_DIR)%.o: $(SHARED_DIR)%.c
-	gcc $(FLAGS) $(INCL) -o $@ -c $<
+	@gcc $(FLAGS) $(INCL) -o $@ -c $<
 
 $(OBJS_DIR)%.o: $(CHECKER_DIR)%.c
-	echo "checker objs"
-	gcc $(FLAGS) $(INCL) -o $@ -c $<
+	@gcc $(FLAGS) $(INCL) -o $@ -c $<
 
 $(OBJS_DIR)%.o: $(VISUAL_DIR)%.c
-	echo "visual objs"
-	gcc $(FLAGS) $(INCL) -o $@ -c $<
+	@gcc $(FLAGS) $(INCL) -o $@ -c $<
 
 $(NAME): $(OBJS_DIR) $(SHARED_OBJS) $(PUSH_OBJS)
-	gcc $(FLAGS) $(INCL) -o $@ $(PUSH_OBJS) $(SHARED_OBJS) $(LIB)
+	@gcc $(FLAGS) $(INCL) -o $@ $(wildcard $(OBJS_DIR)*.o) $(LIB)
 	@echo "${BOLD}[push_swap]${RESET}\tCompiled!"
 
 $(CHECKER): $(CHECKER_OBJS) $(SHARED_OBJS) $(VISUAL_OBJS)
-	gcc $(FLAGS) $(INCL) -o $@ $(CHECKER_OBJS) $(SHARED_OBJS) $(VISUAL_OBJS) $(LIB)
+	@gcc $(FLAGS) $(INCL) -o $@ $(wildcard $(OBJS_DIR)*.o) $(LIB)
 	@echo "${BOLD}[checker]${RESET}\tCompiled!"
 
 clean:
 	@rm -rf $(OBJS_DIR)
 	@make -s clean -C ./libft
 	@echo "${BOLD}[push_swap]${RESET}\tObject files has been deleted"
+	@echo "${BOLD}[checker]${RESET}\tObject files has been deleted"
 
 fclean:
 	@make -s fclean -C ./libft
@@ -92,6 +91,8 @@ fclean:
 	@echo "${BOLD}[push_swap]${RESET}\tObject files has been deleted"
 	@rm -f $(NAME) $(CHECKER)
 	@echo "${BOLD}[push_swap]${RESET}\tExcutable file has been deleted"
+	@echo "${BOLD}[checker]${RESET}\tObject files has been deleted"
+	@echo "${BOLD}[checker]${RESET}\tExcutable file has been deleted"
 
 re: fclean all
 
