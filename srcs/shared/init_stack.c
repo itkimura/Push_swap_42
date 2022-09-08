@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/02 18:13:15 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/06 09:50:33 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_dlst	*dlstnew(t_dlst *prev, int number)
 	if (!new)
 		return (0);
 	new->value = number;
+	new->index = 0;
 	new->prev = prev;
 	new->next = NULL;
 	return (new);

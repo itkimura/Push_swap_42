@@ -6,7 +6,7 @@
 #    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 11:55:29 by itkimura          #+#    #+#              #
-#    Updated: 2022/09/03 12:07:00 by itkimura         ###   ########.fr        #
+#    Updated: 2022/09/06 12:15:24 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,14 @@ VISUAL_DIR		= ./srcs/visualizer/
 OBJS_DIR		= ./objects/
 
 # FILES
-SHARED_FILES	= validation.c	init_stack.c	operations.c	\
-				  apply_operations.c	print.c
-PUSH_FILES		= push_swap.c		dfs.c		print_answer.c
+SHARED_FILES	= validation.c			init_stack.c	operations.c	\
+				  apply_operations.c	is_sorted.c		print.c
+PUSH_FILES		= push_swap.c			dfs.c			print_answer.c	\
+				  index.c				quick_sort.c
 CHECKER_FILES 	= checker.c
 VISUAL_FILES 	= visualizer.c
 SHARED_OBJS		= $(addprefix	$(OBJS_DIR), $(SHARED_FILES:.c=.o))
-PUSH_OBJS			= $(addprefix	$(OBJS_DIR), $(PUSH_FILES:.c=.o))
+PUSH_OBJS		= $(addprefix	$(OBJS_DIR), $(PUSH_FILES:.c=.o))
 CHECKER_OBJS	= $(addprefix	$(OBJS_DIR), $(CHECKER_FILES:.c=.o))
 VISUAL_OBJS		= $(addprefix	$(OBJS_DIR), $(VISUAL_FILES:.c=.o))
 
@@ -72,11 +73,11 @@ $(OBJS_DIR)%.o: $(VISUAL_DIR)%.c
 	@gcc $(FLAGS) $(INCL) -o $@ -c $<
 
 $(NAME): $(OBJS_DIR) $(SHARED_OBJS) $(PUSH_OBJS)
-	@gcc $(FLAGS) $(INCL) -o $@ $(wildcard $(OBJS_DIR)*.o) $(LIB)
+	@gcc $(FLAGS) $(INCL) -o $@ $(SHARED_OBJS) $(PUSH_OBJS) $(LIB)
 	@echo "${BOLD}[push_swap]${RESET}\tCompiled!"
 
 $(CHECKER): $(CHECKER_OBJS) $(SHARED_OBJS) $(VISUAL_OBJS)
-	@gcc $(FLAGS) $(INCL) -o $@ $(wildcard $(OBJS_DIR)*.o) $(LIB)
+	@gcc $(FLAGS) $(INCL) -o $@ $(CHECKER_OBJS) $(SHARED_OBJS) $(VISUAL_OBJS) $(LIB)
 	@echo "${BOLD}[checker]${RESET}\tCompiled!"
 
 clean:

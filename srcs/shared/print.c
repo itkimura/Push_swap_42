@@ -27,7 +27,7 @@ void	print_detail(t_dlst *stack_a, t_dlst *stack_b)
 	{
 		if (next_a)
 		{
-			printf("No.%5d:%15p\tvalue:%10d\tprev:%15p\tnext:%15p[%d]\n", i, next_a,  next_a->value, next_a->prev, next_a->next, next_a->next->value);
+			printf("No.%5d:%15p\tvalue:%10d\tindex:%10d\tprev:%15p[%d]\tnext:%15p[%d]\n", i, next_a,  next_a->value, next_a->index, next_a->prev, next_a->prev->value,  next_a->next, next_a->next->value);
 			next_a = next_a->next;
 		}
 		i++;

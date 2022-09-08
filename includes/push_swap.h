@@ -15,16 +15,23 @@
 typedef	struct		s_dlst
 {
 	int				value;
+	int				index;
 	struct s_dlst	*next;
 	struct s_dlst	*prev;
 }					t_dlst;
 
 typedef	struct	s_sort
 {
-	int			max;
-	int			prev;
-	int		tmp[SORTLIMIT + 10];
-	int		ans[SORTLIMIT + 10];
+	int			total; /* total input */
+	int			max;   /* max turn for dfs */
+	int			prev;  /* prev turn for dfs */
+	int			tmp[SORTLIMIT + 10]; /* current tmp ans for *dfs */
+	int			ans[SORTLIMIT + 10]; /* and for dfs */
+	int			*quick_sort; /* answer for quick sort */
+	int			total_turn; /* total turn for quick sort */
+	int			b_size; /* size of b_stack */
+	int			a_next_index; /* a's next index */
+	int			b_next_index; /* b's next index */
 }				t_sort;
 
 enum ops{
@@ -43,11 +50,19 @@ enum ops{
 
 /* push_swap */
 /* dfs.c */
+void	b_dfs(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int turn);
 void	dfs(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int turn);
 
 /* push_answer.c */
 void	print_operations(int index);
-void print_ans(t_sort *t);
+void	print_ans(t_sort *t);
+
+/* index.c */
+int	init_index(t_dlst *stack_a, int total);
+
+/* quick_sort.c */
+int		stack_size(t_dlst *stack);
+int	big_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t);
 
 /* shared */
 /* validation.c */
@@ -55,6 +70,10 @@ void	error(void);
 int	dublicate_check(int nb, t_dlst **curr);
 int	is_valid_nb(char *str, int *i);
 int	is_valid_str(char *str, t_dlst **curr, int *total);
+
+/* is_sorted.c */
+int	is_sorted(t_dlst *a, t_dlst *b);
+int	is_b_sorted(t_dlst *b, t_sort *t);
 
 /* init_stack */
 t_dlst	*dlstnew(t_dlst *prev, int number);
@@ -77,7 +96,6 @@ int	recover_dlst(t_dlst *stack_a, t_dlst *stack_b, int index);
 int	apply_op(int index, t_dlst *stack_a, t_dlst *stack_b);
 
 /* checker */
-int	is_sorted(t_dlst *a, t_dlst *b);
 
 /* visualizer */
 void	v_stack(t_dlst *stack_a, t_dlst *stack_b);
