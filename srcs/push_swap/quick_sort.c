@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/07 16:49:17 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:16:27 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,214 +14,93 @@
 
 /* if the number of b next index is on the top -> rb */
 
-int		b_next_keep(t_dlst *stack_b, t_sort *t)
+int	apply_and_add(int op, t_dlst *stack_a, t_dlst *stack_b)
 {
-	t->b_next_index++;
-	if (t->b_size == 1)
+	apply_op(op, stack_a, stack_b);
+	return(op);
+}
+
+/* 
+ * Check if the top of stack_a is what b wants next
+ * If there are no index in B, nothing to do
+ * if b's last number is what B want next, rb 
+*/
+
+int		b_next_keep(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int size)
+{
+	t->b_next++;
+	if (size == 1)
 		return (1);
-	if (stack_b->prev->index == t->b_next_index)
-		t->b_next_index++;
-	rotate(stack_b);
-	t->ans[t->total_turn++] = rb;
+	if (stack_b->prev->index == t->b_next)
+		t->b_next++;
+	t->q_ans[t->turn++] = apply_and_add(rb, stack_a, stack_b);
+	return (1);
+}
+
+/* Check if b_next is included in stack_b */
+
+int		is_b_next_included(t_dlst *stack_b, t_sort *t)
+{
+	t_dlst	*tmp;
+
+	tmp = stack_b->next;
+	while(tmp != stack_b)
+	{
+		if(tmp->index == t->b_next)
+			return (1);
+		tmp = tmp->next;
+	}
 	return (0);
+
 }
 
 void	half_size(t_dlst *stack_a, t_dlst *stack_b, t_sort *t)
 {
+	int	i;
+	int	size;
 	int	pivot;
-	int i;
 
-	t->quick_sort = (int *)malloc(sizeof(int) * (t->total * 2));
+	size = 0;
 	pivot = t->total / 2;
+	t->q_ans = (int *)malloc(sizeof(int) * t->total);
 	i = 0;
-	while (i < t->total && t->b_size < pivot)
+	while (i < t->total && size < pivot)
 	{
-		while (stack_b->next->index == t->b_next_index)
+		while(stack_b->next->index == t->b_next)
+			if (b_next_keep(stack_a, stack_b, t, size))
+				break ;
+		/*if top is b_next + 1 and if next_b is not in stack_b, rotate_b*/
+		if (stack_b->next->index == t->b_next + 1 && !is_b_next_included(stack_b, t) && size > 1)
+			t->q_ans[t->turn++] = apply_and_add(rb, stack_a, stack_b);
+		if (stack_a->next->index < pivot)
 		{
-			if (b_next_keep(stack_b, t))
-				break;
-		}
-		if (stack_a->next->index >= pivot)
-		{
-			rotate(stack_a);
-			t->quick_sort[t->total_turn++] = ra;
+			t->q_ans[t->turn++] = apply_and_add(pb, stack_a, stack_b);
+			size++;
 		}
 		else
-		{
-			push(stack_a, stack_b);
-			t->quick_sort[t->total_turn++] = pb;
-		}
+			t->q_ans[t->turn++] = apply_and_add(ra, stack_a, stack_b);
 		i++;
+		print_stack(stack_a, stack_b);
 	}
-	t->b_size = stack_size(stack_b);
-}
-
-void	add_answer(t_sort *t, int *ans, int ans_size)
-{
-	int	i;
-	int	len;
-	int	*new;
-
-	len = t->total_turn + ans_size;
-	printf("len = %d\n", len);
-	new = (int *)malloc(sizeof(int) * len);
-	i = 0;
-	while (i < len)
-	{
-		if (i < t->total_turn)
-			new[i] = t->quick_sort[i];
-		else
-			new[i] = ans[i - t->total_turn];
-		i++;
-	}
-	free(t->quick_sort);
-	t->total_turn += ans_size;
-	t->quick_sort = new;
-}
-
-void	b_quick_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t)
-{
-	int		i;
-	int		pivot;
-	int		b_total;
-	int		*ans;
-
-	i = 0;
-	b_total = stack_size(stack_b);
-	pivot = b_total / 2;
-	ans = (int *)malloc(sizeof(int) * b_total);
-	while (i < b_total)
-	{
-		printf("t->a_next_index = %d stack_b->next->index = %d stack_b->next->value = %d\n", t->a_next_index, stack_b->next->index, stack_b->next->value);
-		if (stack_b->next->index == t->a_next_index)
-		{
-			push(stack_b, stack_a);
-			rotate(stack_a);
-			ans[i++] = pa;
-			ans[i++] = rra;
-			t->a_next_index++;
-		}
-		else if (stack_b->next->index >= pivot)
-		{
-			push(stack_b, stack_a);
-			ans[i++] = pa;
-		}
-		else
-		{
-			rotate(stack_b);
-			ans[i++] = rb;
-		}
-		i++;
-	}
-	print_stack(stack_a, stack_b);
-	add_answer(t, ans, i);
-	free(ans);
-}
-
-void	b_top(t_dlst *stack_a, t_dlst *stack_b, t_sort *t)
-{
-	int	i;
-	int *ans;
-
-	i = 0;
-	ans = (int *)malloc(sizeof(int) * t->b_size);
-	printf("t->b_next_index = %d\n", t->b_next_index);
-	while (i + t->a_next_index < t->b_next_index)
-	{
-		if (stack_b->prev->index == t->b_next_index - i - 1)
-		{
-			reverse(stack_b);
-			ans[i] = rb;
-		}
-		else if (stack_b->prev->prev->index == t->b_next_index - i - 1)
-		{
-			reverse(stack_b);
-			reverse(stack_b);
-			ans[i++] = rb;
-			ans[i] = rb;
-		}
-		else if (stack_b->next->index == t->b_next_index - i - 1)
-		{
-			push(stack_b, stack_a);
-			ans[i] = pa;
-		}
-		i++;
-	}
-	while (stack_a->next->index == t->a_next_index)
-	{
-		rotate(stack_a);
-		ans[i++] = ra;
-		t->a_next_index++;
-	}
-	printf("i = %d\n", i);
-	add_answer(t, ans, i - t->b_next_index);
-	free(ans);
-}
-
-void	b_dfs_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t)
-{
-	int i;
-	int *ans;
-
-	i = 0;
-	b_dfs(stack_a, stack_b, t, 0);
-	t->total_turn += t->max;
-	add_answer(t, t->ans, t->max);
-	while (i < t->max)
-		apply_op(t->ans[i++], stack_a, stack_b);
-	ft_memset(t->tmp, -1, sizeof(t->tmp));
-	ft_memset(t->ans, -1, sizeof(t->ans));
-	t->max = SORTLIMIT;
-	i++;
-	ans = (int *)malloc(sizeof(int) * t->b_size);
-	while(stack_b->next != stack_b)
-	{
-		push(stack_b, stack_a);
-		rotate(stack_a);
-		ans[i++] = pa;
-		ans[i++] = ra;
-		t->a_next_index++;
-		t->b_next_index++;
-	}
-	add_answer(t, ans, i);
-	free(ans);
 }
 
 int	big_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t)
 {
+	int size;
 	if (!init_index(stack_a, t->total))
 		return (0);
-		printf("half_size\n");
+	printf("half_size\n");
 	half_size(stack_a, stack_b, t);
+	printf("t->b_next = %d\n", t->b_next);
 	print_stack(stack_a, stack_b);
-	while (t->a_next_index != t->total)
+	(void)size;
+	printf("\n--- End result ---\n");
+	for(int i = 0; i < t->turn; i++)
 	{
-		printf("b_top\n");
-		print_stack(stack_a, stack_b);
-		b_top(stack_a, stack_b, t);
-		while ((t->b_size = stack_size(stack_b)) > 4)
-			b_quick_sort(stack_a, stack_b, t);
-		printf("b_quick_sort\n");
-		print_stack(stack_a, stack_b);
-		b_dfs_sort(stack_a, stack_b, t);
-		printf("after dfs\n");
-		print_stack(stack_a, stack_b);
-		break ;
+		printf("[%3d] ", i);
+		print_operations(t->q_ans[i]);
 	}
-	/*
-	int turn;
-	turn = 0;
-	t->b_size = 3;
-	for (int i = 0; i < t->max; i++)
-		apply_op(t->ans[i], stack_a, stack_b);
-	add_answer(t, t->ans, t->max);
-	print_stack(stack_a, stack_b);
-	*/
-	printf("End result \n");
-	int count;
-	for(count = 0; count < t->total_turn; count++)
-		print_operations(t->quick_sort[count]);
-	printf("count = %d\n", count);
-	free(t->quick_sort);
+	printf("\n");
+	free(t->q_ans);
 	return (1);
 }

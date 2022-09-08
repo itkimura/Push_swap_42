@@ -27,11 +27,10 @@ typedef	struct	s_sort
 	int			prev;  /* prev turn for dfs */
 	int			tmp[SORTLIMIT + 10]; /* current tmp ans for *dfs */
 	int			ans[SORTLIMIT + 10]; /* and for dfs */
-	int			*quick_sort; /* answer for quick sort */
-	int			total_turn; /* total turn for quick sort */
-	int			b_size; /* size of b_stack */
-	int			a_next_index; /* a's next index */
-	int			b_next_index; /* b's next index */
+	int			*q_ans; /* answer for quick sort */
+	int			turn; /* total turn for quick sort */
+	int			a_next; /* a's next index */
+	int			b_next; /* b's next index */
 }				t_sort;
 
 enum ops{
