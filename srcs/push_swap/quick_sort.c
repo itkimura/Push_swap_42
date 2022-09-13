@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/12 23:51:45 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:24:22 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	half_size(t_dlst *stack_a, t_dlst *stack_b, t_sort *t)
 		while(stack_b->next->index == t->b_next && stack_b->next != stack_b)
 			if (b_next_keep(stack_a, stack_b, t, size))
 				break ;
-	/*if top is b_next + 1 and if next_b is not in stack_b, rotate_b*/
+		/*if top is b_next + 1 and if next_b is not in stack_b, rotate_b*/
 //		if (stack_b->next->index == t->b_next + 1 && !is_b_next_included(stack_b, t) && size > 1)
 //			t->q_ans[t->turn++] = apply_and_add(rb, stack_a, stack_b);
 //		if (stack_a->next->index == t->a_next + 1 && i == t->total - 2)
@@ -123,7 +123,9 @@ void	b_top(t_dlst *stack_a, t_dlst *stack_b, t_sort *t)
 		}
 		/*if the top b is b_next - 1 then pa*/
 		if (stack_b->next->index == t->b_next - i - 1)
+		{
 			t->q_ans[t->turn++] = apply_and_add(pa, stack_a, stack_b);
+		}
 		i++;
 	}
 	/*if the top a is same as a_next, move it to the last a */
@@ -146,12 +148,14 @@ void	b_quick_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int size)
 //	printf("size = %d\n", size);
 	pivot = t->a_next + ((size - 1) / 2);
 //	printf("size = %d\n", size);
+	t->sort_turn++;
 	while(i < size)
 	{
 		if (stack_b->next->index == t->a_next && stack_b->next != stack_b)
 		{
 			t->q_ans[t->turn++] = apply_and_add(pa, stack_a, stack_b);
 			t->q_ans[t->turn++] = apply_and_add(ra, stack_a, stack_b);
+			t->b_next++;
 			t->a_next++;
 		}
 		else if (t->a_next == stack_b->prev->index)
@@ -160,10 +164,12 @@ void	b_quick_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int size)
 			t->q_ans[t->turn++] = apply_and_add(pa, stack_a, stack_b);
 			t->q_ans[t->turn++] = apply_and_add(ra, stack_a, stack_b);
 			size++;
+			t->b_next++;
 			t->a_next++;
 		}
 		else if (stack_b->next->index > pivot && stack_b->next != stack_b)
 		{
+			t->next_size[t->sort_turn]++;
 			t->q_ans[t->turn++] = apply_and_add(pa, stack_a, stack_b);
 		}
 		else
@@ -175,7 +181,7 @@ void	b_quick_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int size)
 //	print_stack(stack_a, stack_b, t);
 }
 
-void	b_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int size)
+void	b_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t)
 {
 	int	i;
 
@@ -187,7 +193,7 @@ void	b_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int size)
 		t->b_next++;
 		t->a_next++;
 	}
-	if ((size = stack_size(stack_b)))
+	if ((t->b_size = stack_size(stack_b)))
 		b_dfs(stack_a, stack_b, t, 0);
 	while (i < t->max && t->ans[i] != -1)
 	{
@@ -211,20 +217,22 @@ void	b_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int size)
 	ft_memset(t->ans, -1, sizeof(t->ans));
 }
 
-void	a_quick_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int size)
+void	a_quick_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t)
 {
-	int i;
-
+	int	i;
 	i = 0;
-	size = t->total - t->a_next;
-	while (i < size)
+//	printf("Before:t->next_size[%d] = %d\n", t->sort_turn, t->next_size[t->sort_turn]);
+	while (i < t->next_size[t->sort_turn])
 	{
 		if (stack_b->prev->index == t->a_next)
 			t->q_ans[t->turn++] = apply_and_add(rrb, stack_a, stack_b);
 		if (stack_b->next->next->index == t->a_next)
 			t->q_ans[t->turn++] = apply_and_add(sb, stack_a, stack_b);
 		if (stack_b->next->index == t->a_next)
+		{
+			t->next_size[t->sort_turn]++;
 			t->q_ans[t->turn++] = apply_and_add(pa, stack_a, stack_b);
+		}
 		if (stack_a->next->next->index == t->a_next &&
 		stack_a->next->index == t->a_next + 1)
 			t->q_ans[t->turn++] = apply_and_add(sa, stack_a, stack_b);
@@ -237,12 +245,14 @@ void	a_quick_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int size)
 		else
 			t->q_ans[t->turn++] = apply_and_add(pb, stack_a, stack_b);
 		i++;
-		if (stack_a->next->index == 0)
-			break ;
 	}
-//		printf("t->next_size[%d] = %d\n", t->sort_turn, t->next_size[t->sort_turn]);
-//		printf("--- a_quick_sort, size = %d = %d ---\n", size, i);
-//		print_stack(stack_a, stack_b, t);
+	t->next_size[t->sort_turn] = 0;
+	if (t->sort_turn)
+		t->sort_turn--;
+//	printf("After:t->next_size[%d] = %d\n", t->sort_turn, t->next_size[t->sort_turn]);
+//	printf("--- a_quick_sort ---\n");
+//	print_stack(stack_a, stack_b, t);
+
 }
 
 void	optimise(t_sort *t)
@@ -283,22 +293,22 @@ void	optimise(t_sort *t)
 int	big_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t)
 {
 	int size;
-	int i;
+//	int i;
 
-	i = 0;
-
+//	i = 0;
 	if (!init_index(stack_a, t->total))
 		return (0);
 	half_size(stack_a, stack_b, t);
+//	while (i < 20)
 	while (!is_sorted(stack_a, stack_b))
 	{
 		b_top(stack_a, stack_b,t);
-		while ((size = stack_size(stack_b)) > 4)
+		while ((size = stack_size(stack_b)) > 3)
 			b_quick_sort(stack_a, stack_b, t, size);
-//		printf("t->turn = %d\n", t->turn);
-		b_sort(stack_a, stack_b, t, size);
-		a_quick_sort(stack_a, stack_b, t, size);
-		i++;
+		b_sort(stack_a, stack_b, t);
+		while (stack_size(stack_b) == 0 && !is_sorted(stack_a, stack_b))
+			a_quick_sort(stack_a, stack_b, t);
+	//	i++;
 	}
 //	printf("\n--- End result ---\n");
 //	for(int i = 0; i < t->turn; i++)

@@ -31,6 +31,7 @@ typedef	struct	s_sort
 	int			turn; /* total turn for quick sort */
 	int			a_next; /* a's next index */
 	int			b_next; /* b's next index */
+	int			b_size; /* b's next index */
 	int			sort_turn;
 	int			next_size[100]; /* b's pivot */
 }				t_sort;
@@ -75,7 +76,7 @@ int	is_valid_str(char *str, t_dlst **curr, int *total);
 
 /* is_sorted.c */
 int	is_sorted(t_dlst *a, t_dlst *b);
-int	is_b_sorted(t_dlst *b);
+int	is_b_sorted(t_dlst *b, t_sort *t);
 
 /* init_stack */
 t_dlst	*dlstnew(t_dlst *prev, int number);
