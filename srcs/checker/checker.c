@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/05 11:49:55 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/12 12:22:48 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,33 @@ int	checker(t_dlst *stack_a, t_dlst *stack_b, int v)
 	}
 	return (1);
 }
+int	init_ans(t_sort **t)
+{
+	t_sort	*new;
+
+	new = (t_sort *)malloc(sizeof(t_sort));
+	if (!new)
+		return (0);
+	new->max = SORTLIMIT;
+	new->total = 0;
+	new->prev = -1;
+	new->turn = 0;
+	new->a_next = 0;
+	new->b_next = 0;
+	new->b_pivot = 0;
+	ft_memset(new->tmp, -1, sizeof(new->tmp));
+	ft_memset(new->ans, -1, sizeof(new->ans));
+	ft_memset(new->q_ans, -1, sizeof(new->ans));
+	*t = new;
+	return (1);
+}
 
 int	main(int ac, char **av)
 {
 	t_dlst	*stack_a;
 	t_dlst	*stack_b;
 	int		total;
+		t_sort	*t;
 
 	if (ac >= 2)
 	{
@@ -74,6 +95,8 @@ int	main(int ac, char **av)
 			ft_putstr("KO\n");
 		else
 			ft_putstr("OK\n");
+		if (!init_ans(&t))
+			return (0);
 		free_stack(&stack_a);
 		free_stack(&stack_b);
 	}

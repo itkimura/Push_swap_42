@@ -50,7 +50,7 @@ void	print_detail(t_dlst *stack_a, t_dlst *stack_b)
 	printf("-------------\n");
 }
 
-void	print_stack(t_dlst *stack_a, t_dlst *stack_b)
+void	print_stack(t_dlst *stack_a, t_dlst *stack_b, t_sort *t)
 {
 	t_dlst *next_a;
 	t_dlst *next_b;
@@ -81,6 +81,7 @@ void	print_stack(t_dlst *stack_a, t_dlst *stack_b)
 	next_a = stack_a;
 	next_b = stack_b;
 	printf("print_stack:\n");
+	printf("a_next[%3d] | b_next[%3d]\n", t->a_next, t->b_next);
 	for (int j = 0; j < max_digits + 2; j++)
 		printf("-");
 	printf("|");

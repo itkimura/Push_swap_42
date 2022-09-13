@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:14:39 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/07 14:47:28 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:55:09 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	b_dfs(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int turn)
 	ops = -1;
 	if (turn >= t->max)
 		return ;
-	if (is_b_sorted(stack_b, t))
+	if (is_b_sorted(stack_b))
 		return (update_ans(t, turn));
 	while (++ops <= rrr)
 	{

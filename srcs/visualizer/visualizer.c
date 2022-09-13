@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:32:31 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/02 18:16:01 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/12 10:38:26 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	v_stack(t_dlst *stack_a, t_dlst *stack_b)
 			next_b = next_b->next;
 		if (next_a == stack_a)
 			ft_printf("---------------------------------\n");
-		usleep(200000);
+		usleep(50000);
 	}
 }
 
