@@ -20,6 +20,12 @@ typedef	struct		s_dlst
 	struct s_dlst	*prev;
 }					t_dlst;
 
+typedef	struct		s_qsans
+{
+	int				index;
+	struct	s_qsans	*next;
+}					t_qsans;
+
 typedef	struct	s_sort
 {
 	int			total; /* total input */
@@ -31,9 +37,11 @@ typedef	struct	s_sort
 	int			turn; /* total turn for quick sort */
 	int			a_next; /* a's next index */
 	int			b_next; /* b's next index */
-	int			b_size; /* b's next index */
+	int			b_size; /* b's size*/
+	t_qsans		*q_last;
 	int			sort_turn;
-	int			next_size[100]; /* b's pivot */
+	int			next_size[100]; /* next_size */
+	t_qsans		*last;
 }				t_sort;
 
 enum ops{

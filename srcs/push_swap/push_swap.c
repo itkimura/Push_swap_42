@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/12 20:30:48 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:12:13 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	init_ans(t_sort **t)
 	new->a_next = 0;
 	new->b_next = 0;
 	new->sort_turn = 0;
+	new->q_last = NULL;
 	ft_memset(new->tmp, -1, sizeof(new->tmp));
 	ft_memset(new->ans, -1, sizeof(new->ans));
 	ft_memset(new->q_ans, -1, sizeof(new->ans));
@@ -100,6 +101,6 @@ int	main(int ac, char **av)
 		if (!push_swap(ac, av))
 			return (1);
 	}
-	//system("leaks push_swap");
+//	system("leaks push_swap");
 	return (0);
 }
