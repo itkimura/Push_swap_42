@@ -6,7 +6,7 @@
 #    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 11:55:29 by itkimura          #+#    #+#              #
-#    Updated: 2022/09/13 23:13:46 by itkimura         ###   ########.fr        #
+#    Updated: 2022/09/15 18:05:17 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ OBJS_DIR		= ./objects/
 SHARED_FILES	= validation.c			init_stack.c	operations.c	\
 				  apply_operations.c	is_sorted.c		print.c
 PUSH_FILES		= push_swap.c			dfs.c			print_answer.c	\
-				  index.c				quick_sort.c
+				  index.c				quick_sort.c	qs_answer.c		\
+				  big_sort.c
 CHECKER_FILES 	= checker.c
 VISUAL_FILES 	= visualizer.c
 SHARED_OBJS		= $(addprefix	$(OBJS_DIR), $(SHARED_FILES:.c=.o))

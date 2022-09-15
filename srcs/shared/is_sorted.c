@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/13 11:29:03 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:14:57 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * return (0) = false
  * return (1) = true
 */
-int		stack_size(t_dlst *stack)
+int	stack_size(t_dlst *stack)
 {
 	int		i;
 	t_dlst	*tmp;
@@ -33,12 +33,12 @@ int		stack_size(t_dlst *stack)
 
 int	is_b_sorted(t_dlst *b, t_sort *t)
 {
-	t_dlst *tmp;
+	t_dlst	*tmp;
 
 	tmp = b->next;
 	while (tmp != b)
 	{
-		if(tmp->value > tmp->next->value && tmp->next != b)
+		if (tmp->value > tmp->next->value && tmp->next != b)
 			return (0);
 		tmp = tmp->next;
 	}
@@ -57,12 +57,8 @@ int	is_sorted(t_dlst *a, t_dlst *b)
 	while (tmp != a)
 	{
 		if (tmp->value > tmp->next->value && tmp->next != a)
-		{
-//			printf("tmp->value = %d tmp->next->valu = %d\n", tmp->value, tmp->next->value);
 			return (0);
-		}
 		tmp = tmp->next;
 	}
 	return (1);
 }
-

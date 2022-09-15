@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/02 18:10:22 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:12:38 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,27 @@
 void	print_operations(int index)
 {
 	if (index == sa)
-		printf("sa\n");
+		ft_putstr("sa\n");
 	if (index == sb)
-		printf("sb\n");
+		ft_putstr("sb\n");
 	if (index == ss)
-		printf("ss\n");
+		ft_putstr("ss\n");
 	if (index == pa)
-		printf("pa\n");
+		ft_putstr("pa\n");
 	if (index == pb)
-		printf("pb\n");
+		ft_putstr("pb\n");
 	if (index == ra)
-		printf("ra\n");
+		ft_putstr("ra\n");
 	if (index == rb)
-		printf("rb\n");
+		ft_putstr("rb\n");
 	if (index == rr)
-		printf("rr\n");
+		ft_putstr("rr\n");
 	if (index == rra)
-		printf("rra\n");
+		ft_putstr("rra\n");
 	if (index == rrb)
-		printf("rrb\n");
+		ft_putstr("rrb\n");
 	if (index == rrr)
-		printf("rrr\n");
+		ft_putstr("rrr\n");
 }
 
 void	print_ans(t_sort *t)

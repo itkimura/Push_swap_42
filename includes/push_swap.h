@@ -9,9 +9,6 @@
 # include "ft_printf.h"
 # define SORTLIMIT 30
 
-/*Delete later*/
-# include <stdio.h>
-
 typedef	struct		s_dlst
 {
 	int				value;
@@ -45,22 +42,29 @@ typedef	struct	s_sort
 }				t_sort;
 
 enum ops{
-	sa, //0
-	sb, //1
-	ss, //2
-	pa, //3
-	pb, //4
-	ra, //5
-	rb, //6
-	rr, //7
-	rra,//8
-	rrb, //9
-	rrr //10
+	sa,
+	sb,
+	ss,
+	pa,
+	pb,
+	ra,
+	rb,
+	rr,
+	rra,
+	rrb,
+	rrr
 };
 
 /* push_swap */
+/* push_swap.c */
+int	init_ans(t_sort **t);
+void	free_all(t_dlst **stack_a, t_dlst **stack_b, t_sort *t);
+int	sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int turn);
+int	push_swap(int ac, char **av);
+int	main(int ac, char **av);
 
 /* dfs.c */
+void	update_ans(t_sort *t, int turn);
 void	b_dfs(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int turn);
 void	dfs(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int turn);
 
@@ -69,12 +73,30 @@ void	print_operations(int index);
 void	print_ans(t_sort *t);
 
 /* index.c */
+void	int_swap(int *a, int *b);
+void	index_sort(int *index, int left, int right);
+void	add_index(t_dlst *stack_a, int *index, int total);
 int	init_index(t_dlst *stack_a, int total);
 
-/* quick_sort.c */
-int		stack_size(t_dlst *stack);
+/* big_sort.c */
+int	b_next_keep(t_dlst *stack_a, t_dlst *stack_b, t_sort *t);
+void	half_size(t_dlst *stack_a, t_dlst *stack_b, t_sort *t);
+void	b_top(t_dlst *stack_a, t_dlst *stack_b, t_sort *t);
 int	big_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t);
 
+/* quick_sort.c */
+void	b_qs_condition(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int pivot);
+void	b_quick_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t);
+void	b_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t);
+void	a_qs_condition(t_dlst *stack_a, t_dlst *stack_b, t_sort *t);
+void	a_quick_sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t);
+
+/* qs_answer.c */
+int	new_qsans(t_qsans **a);
+void	add_qsans(int op, t_dlst *stack_a, t_dlst *stack_b, t_sort *t);
+void	qsans_condition(t_qsans **a);
+void	qsans_print(t_qsans *a);
+void	free_qsans(t_qsans **a);
 /* shared */
 /* validation.c */
 void	error(void);
@@ -83,14 +105,15 @@ int	is_valid_nb(char *str, int *i);
 int	is_valid_str(char *str, t_dlst **curr, int *total);
 
 /* is_sorted.c */
-int	is_sorted(t_dlst *a, t_dlst *b);
+int		stack_size(t_dlst *stack);
 int	is_b_sorted(t_dlst *b, t_sort *t);
+int	is_sorted(t_dlst *a, t_dlst *b);
 
 /* init_stack */
 t_dlst	*dlstnew(t_dlst *prev, int number);
 int	init_dlst(t_dlst **stack_a, t_dlst **stack_b);
-int	add_stack(char *str, t_dlst **curr, int *total);
 void	free_stack(t_dlst **stack);
+int	add_stack(char *str, t_dlst **curr, int *total);
 int	init_stack(int ac, char **av, t_dlst **stack_a, int *total);
 
 /* operations.c */

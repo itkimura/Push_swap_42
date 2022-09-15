@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/15 16:12:13 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:52:27 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	free_all(t_dlst **stack_a, t_dlst **stack_b, t_sort *t)
 	free_stack(stack_b);
 	free(t);
 }
-
 
 /* check if the number of argument is less than 7 or not */
 

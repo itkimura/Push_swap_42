@@ -6,24 +6,26 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/06 10:11:35 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:52:04 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void int_swap(int *a, int *b)
+void	int_swap(int *a, int *b)
 {
-	int tmp;
+	int	tmp;
+
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
 }
 
-void index_sort(int *index, int left, int right)
+void	index_sort(int *index, int left, int right)
 {
-	int pivot;
-	int i, j;
+	int	pivot;
+	int	i;
+	int	j;
 
 	if (left >= right)
 		return ;
@@ -46,17 +48,9 @@ void index_sort(int *index, int left, int right)
 	index_sort(index, j + 1, right);
 }
 
-void print_index (int *index, int total)
-{
-	for(int j = 0; j < total; j++)
-	{
-		printf("index[%d] = %d\n", j, index[j]);
-	}
-}
-
 void	add_index(t_dlst *stack_a, int *index, int total)
 {
-	int	i;
+	int		i;
 	t_dlst	*tmp;
 
 	tmp = stack_a->next;
@@ -65,10 +59,10 @@ void	add_index(t_dlst *stack_a, int *index, int total)
 		i = 0;
 		while (i < total)
 		{
-			if(index[i] == tmp->value)
+			if (index[i] == tmp->value)
 			{
 				tmp->index = i;
-				break;
+				break ;
 			}
 			i++;
 		}

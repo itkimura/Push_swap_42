@@ -6,16 +6,15 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:08:46 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/04 23:43:00 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:15:40 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-void exit(int status);
 
 int	swap(t_dlst *stack)
 {
-	t_dlst *top;
+	t_dlst	*top;
 
 	if (stack->next->next == stack || stack->next == stack)
 		return (0);
