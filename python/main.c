@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "libft.h"
 
-int main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	char str[] = "python3 helloworld.py ";
 	char *res;

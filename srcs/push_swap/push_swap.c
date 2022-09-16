@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/15 18:44:24 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/16 11:59:17 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,16 @@ int	init_ans(t_sort **t)
 	new = (t_sort *)malloc(sizeof(t_sort));
 	if (!new)
 		return (0);
-	new->max = SORTLIMIT;
 	new->total = 0;
+	new->max = SORTLIMIT;
 	new->prev = -1;
 	new->turn = 0;
 	new->a_next = 0;
 	new->b_next = 0;
-	new->sort_turn = 0;
+	new->turn = 0;
 	new->q_last = NULL;
 	ft_memset(new->tmp, -1, sizeof(new->tmp));
 	ft_memset(new->ans, -1, sizeof(new->ans));
-	ft_memset(new->q_ans, -1, sizeof(new->ans));
 	ft_memset(new->next_size, 0, sizeof(new->ans));
 	*t = new;
 	return (1);
