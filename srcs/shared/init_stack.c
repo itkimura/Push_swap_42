@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/06 09:50:33 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:40:51 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	add_stack(char *str, t_dlst **curr, int *total)
 	tmp = ft_atoli(str);
 	if (tmp < INT_MIN || tmp > INT_MAX)
 	{
-		printf("INT_MIN or INT_MAX\n");
+//		printf("INT_MIN or INT_MAX\n");
 		return (0);
 	}
 	if (!dublicate_check(tmp, curr))

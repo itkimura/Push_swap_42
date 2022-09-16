@@ -9,6 +9,7 @@
 # include "ft_printf.h"
 # define SORTLIMIT 30
 
+# include <stdio.h>
 typedef	struct		s_dlst
 {
 	int				value;

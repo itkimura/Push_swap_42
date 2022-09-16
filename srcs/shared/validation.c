@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/13 22:58:56 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:40:37 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	dublicate_check(int nb, t_dlst **curr)
 	{
 		if (nb == tmp->value)
 		{
-			printf("Duplication:%d\n", nb);
+//			printf("Duplication:%d\n", nb);
 			return (0);
 		}
 		tmp = tmp->prev;
@@ -46,7 +46,7 @@ int	is_valid_nb(char *str, int *i)
 	{
 		if (!(str[*i] >= '0' && str[*i] <= '9'))
 		{
-			printf("Non numeric number\n");
+//			printf("Non numeric number\n");
 			return (0);
 		}
 		if (str[*i])

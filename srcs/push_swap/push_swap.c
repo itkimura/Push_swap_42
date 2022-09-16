@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/15 16:52:27 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:44:24 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,5 @@ int	main(int ac, char **av)
 		if (!push_swap(ac, av))
 			return (1);
 	}
-//	system("leaks push_swap");
 	return (0);
 }
