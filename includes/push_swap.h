@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:53:14 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/16 12:01:11 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/18 12:34:27 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "ft_printf.h"
 # define SORTLIMIT 30
 
+# include <stdio.h>
 typedef struct s_dlst
 {
 	int				value;
@@ -34,6 +35,12 @@ typedef struct s_qsans
 	int				index;
 	struct s_qsans	*next;
 }					t_qsans;
+
+typedef struct s_checker
+{
+	char				*line;
+	struct s_checker	*next;
+}					t_checker;
 
 /*
  * total:		total number of input
@@ -154,6 +161,11 @@ int		recover_dlst(t_dlst *stack_a, t_dlst *stack_b, int index);
 int		apply_op(int index, t_dlst *stack_a, t_dlst *stack_b);
 
 /* checker */
+/* struct.c */
+int	activate_display(int ac, char **av);
+int	new_checker(t_checker **checker);
+void	free_checker(t_checker *c);
+
 
 /* visualizer */
 void	v_stack(t_dlst *stack_a, t_dlst *stack_b);
