@@ -6,7 +6,7 @@
 #    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/15 11:55:29 by itkimura          #+#    #+#              #
-#    Updated: 2022/09/18 12:30:02 by itkimura         ###   ########.fr        #
+#    Updated: 2022/09/19 13:43:05 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OBJS_DIR		= ./objects/
 
 # FILES
 SHARED_FILES	= validation.c			init_stack.c	operations.c	\
-				  apply_operations.c	is_sorted.c		print.c
+				  apply_operations.c	is_sorted.c
 PUSH_FILES		= push_swap.c			dfs.c			print_answer.c	\
 				  index.c				quick_sort.c	qs_answer.c		\
 				  big_sort.c

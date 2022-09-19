@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/18 12:37:18 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:37:13 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ int	checker(t_dlst *stack_a, t_dlst *stack_b, int v)
 {
 	t_checker	*c;
 
-	if (is_sorted(stack_a, stack_b))
-		return (1);
 	if (v)
 		visualizer(stack_a, stack_b, 0);
 	if (!new_checker(&c))
@@ -79,14 +77,14 @@ int	checker(t_dlst *stack_a, t_dlst *stack_b, int v)
 	return (1);
 }
 
-int	init_checker(int ac, char **av, t_dlst *stack_a, t_dlst *stack_b)
+int	init_checker(int ac, char **av, t_dlst **stack_a, t_dlst **stack_b)
 {
 	int		total;
 
 	total = 0;
-	if (!init_dlst(&stack_a, &stack_b))
+	if (!init_dlst(stack_a, stack_b))
 		return (0);
-	if (!init_stack(ac, av, &stack_a, &total))
+	if (!init_stack(ac, av, stack_a, &total))
 		return (0);
 	return (1);
 }
@@ -99,7 +97,7 @@ int	main(int ac, char **av)
 	{
 		stack_a = NULL;
 		stack_b = NULL;
-		if (!init_checker(ac, av, stack_a, stack_b))
+		if (!init_checker(ac, av, &stack_a, &stack_b))
 			return (1);
 		if (!checker(stack_a, stack_b, activate_display(ac, av)))
 			ft_putstr("KO\n");

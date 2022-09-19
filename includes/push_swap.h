@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:53:14 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/18 12:34:27 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:42:56 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include "ft_printf.h"
 # define SORTLIMIT 30
 
-# include <stdio.h>
 typedef struct s_dlst
 {
 	int				value;

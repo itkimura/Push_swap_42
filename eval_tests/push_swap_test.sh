@@ -69,8 +69,8 @@ for (( i=0 ; "$i" < "$times" ; i++ )); do
 		done
 		random=`echo $random| tr '\n' ' '`
 	fi
-	res=`./push_swap $random | ./checker $random`
-	res_nb=`./push_swap $random | wc -l | tr -d ' '`
+	res=`.././push_swap $random | .././checker $random`
+	res_nb=`.././push_swap $random | wc -l | tr -d ' '`
 	ave=$((ave + res_nb))
 	if [ $res_nb -lt $min_res ]; then
 		min_res=$res_nb
@@ -86,9 +86,9 @@ for (( i=0 ; "$i" < "$times" ; i++ )); do
 		fi
 	else
 		if [ $res='OK\n' ]; then
-			echo -e "[${GREEN}OK${NC}] $random"
+			echo -e "[${GREEN}OK${NC}] $random\tres:${res_nb}"
 		else
-			echo -e "[${RED}KO${NC}] $random"
+			echo -e "[${RED}KO${NC}] $random\tres:${res_nb}"
 		fi
 
 	fi
