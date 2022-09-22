@@ -7,5 +7,5 @@ CHECKER = CHECKER_PATH + 'checker'
 # test condition
 MIN = -2147483648
 MAX = +2147483647
-NB_SIZE = 50
+NB_SIZE = 500
 DELAY_TIME = 100
