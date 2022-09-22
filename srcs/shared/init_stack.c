@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/15 18:40:51 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:03:15 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ void	free_stack(t_dlst **stack)
 	t_dlst	*tmp;
 	t_dlst	*next;
 
-	next = (*stack)->next;
+	next = NULL;
+	if (*stack)
+		next = (*stack)->next;
 	while (next != *stack && next)
 	{
 		tmp = next->next;
@@ -70,10 +72,7 @@ int	add_stack(char *str, t_dlst **curr, int *total)
 
 	tmp = ft_atoli(str);
 	if (tmp < INT_MIN || tmp > INT_MAX)
-	{
-//		printf("INT_MIN or INT_MAX\n");
 		return (0);
-	}
 	if (!dublicate_check(tmp, curr))
 		return (0);
 	new = dlstnew(*curr, (int)tmp);
@@ -101,7 +100,6 @@ int	init_stack(int ac, char **av, t_dlst **stack_a, int *total)
 		}
 		if (!is_valid_str(av[i], &curr, total))
 		{
-			free_stack(stack_a);
 			error();
 			return (0);
 		}

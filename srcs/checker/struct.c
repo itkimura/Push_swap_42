@@ -6,11 +6,20 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/18 12:34:10 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:33:49 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	free_stacks(t_dlst **stack_a, t_dlst **stack_b)
+{
+	if (stack_a)
+		free_stack(stack_a);
+	if (stack_b)
+		free_stack(stack_b);
+	return (1);
+}
 
 int	activate_display(int ac, char **av)
 {

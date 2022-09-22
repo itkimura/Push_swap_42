@@ -6,13 +6,14 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:53:14 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/19 13:42:56 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:33:32 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <limits.h>
@@ -88,7 +89,7 @@ enum e_operations{
 /* push_swap */
 /* push_swap.c */
 int		init_ans(t_sort **t);
-void	free_all(t_dlst **stack_a, t_dlst **stack_b, t_sort *t);
+int		free_all(t_dlst **stack_a, t_dlst **stack_b, t_sort *t);
 int		sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int turn);
 int		push_swap(int ac, char **av);
 int		main(int ac, char **av);
@@ -127,6 +128,7 @@ void	add_qsans(int op, t_dlst *stack_a, t_dlst *stack_b, t_sort *t);
 void	qsans_condition(t_qsans **a);
 void	qsans_print(t_qsans *a);
 void	free_qsans(t_qsans **a);
+
 /* shared */
 /* validation.c */
 void	error(void);
@@ -161,10 +163,10 @@ int		apply_op(int index, t_dlst *stack_a, t_dlst *stack_b);
 
 /* checker */
 /* struct.c */
-int	activate_display(int ac, char **av);
-int	new_checker(t_checker **checker);
+int		free_stacks(t_dlst **stack_a, t_dlst **stack_b);
+int		activate_display(int ac, char **av);
+int		new_checker(t_checker **checker);
 void	free_checker(t_checker *c);
-
 
 /* visualizer */
 void	v_stack(t_dlst *stack_a, t_dlst *stack_b);

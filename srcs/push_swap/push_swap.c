@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/16 11:59:17 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:30:26 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,31 @@ int	init_ans(t_sort **t)
 
 /* free all struct in the end */
 
-void	free_all(t_dlst **stack_a, t_dlst **stack_b, t_sort *t)
+int	free_all(t_dlst **stack_a, t_dlst **stack_b, t_sort *t)
 {
-	free_stack(stack_a);
-	free_stack(stack_b);
-	free(t);
+	if (stack_a)
+		free_stack(stack_a);
+	if (stack_b)
+		free_stack(stack_b);
+	if (t)
+		free(t);
+	return (0);
 }
 
 /* check if the number of argument is less than 7 or not */
 
 int	sort(t_dlst *stack_a, t_dlst *stack_b, t_sort *t, int turn)
 {
-	if (t->total < 7)
+	if (!is_sorted(stack_a, stack_b))
 	{
-		dfs(stack_a, stack_b, t, turn);
-		print_ans(t);
+		if (t->total < 7)
+		{
+			dfs(stack_a, stack_b, t, turn);
+			print_ans(t);
+		}
+		else if (!big_sort(stack_a, stack_b, t))
+			return (0);
 	}
-	else if (!big_sort(stack_a, stack_b, t))
-		return (0);
 	return (1);
 }
 
@@ -75,13 +82,13 @@ int	push_swap(int ac, char **av)
 	t = NULL;
 	turn = 0;
 	if (!init_dlst(&stack_a, &stack_b))
-		return (0);
+		return (free_all(&stack_a, &stack_b, t));
 	if (!init_ans(&t))
-		return (0);
+		return (free_all(&stack_a, &stack_b, t));
 	if (!init_stack(ac, av, &stack_a, &t->total))
-		return (0);
+		return (free_all(&stack_a, &stack_b, t));
 	if (!sort(stack_a, stack_b, t, turn))
-		return (0);
+		return (free_all(&stack_a, &stack_b, t));
 	free_all(&stack_a, &stack_b, t);
 	return (1);
 }

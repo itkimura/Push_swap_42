@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/19 13:37:13 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:34:21 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	init_checker(int ac, char **av, t_dlst **stack_a, t_dlst **stack_b)
 		return (0);
 	return (1);
 }
+
 int	main(int ac, char **av)
 {
 	t_dlst	*stack_a;
@@ -98,9 +99,9 @@ int	main(int ac, char **av)
 		stack_a = NULL;
 		stack_b = NULL;
 		if (!init_checker(ac, av, &stack_a, &stack_b))
-			return (1);
+			return (free_stacks(&stack_a, &stack_b));
 		if (!checker(stack_a, stack_b, activate_display(ac, av)))
-			ft_putstr("KO\n");
+			ft_putstr("Error\n");
 		else
 		{
 			if (!is_sorted(stack_a, stack_b))

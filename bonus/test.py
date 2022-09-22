@@ -1,8 +1,10 @@
 import pygame as pg
 from term_printer import ColorRGB, cprint
 import random
+import subprocess
 import sys
 from config import PUSH_SWAP, CHECKER, MIN, MAX, NB_SIZE, DELAY_TIME
+from operations import *
 
 #initial position
 x = 40
@@ -30,9 +32,6 @@ def random_ints_nodup(MIN, MAX, NB_SIZE):
 random = random_ints_nodup(MIN, MAX, NB_SIZE)
 
 #width and height of each GRAPH
-height = (SCREEN_HEIGHT - 150)  / NB_SIZE;
-width = GRAPH_WIDTH / NB_SIZE;
-limit = NB_SIZE;
 
 #color
 r = 248;
@@ -46,21 +45,44 @@ def init_width(NB):
                 NB[i] = j + 1
     return (NB)
 
-def print_stack(stack_a, stack_b):
+def print_stack(stack_a, stack_b, ops, ops_nb):
     g = 248;
-    for i in range(len(stack_a)):
+    height = (SCREEN_HEIGHT - 150)  / NB_SIZE;
+    width = GRAPH_WIDTH / NB_SIZE;
+    limit = len(stack_a)
+    if (limit > 500):
+        height = 1
+        limit = 500
+    for i in range(limit):
         #draw a rectangle, (surface, color, position & dimention, x, y, width, height
-        g = 248 - (8 * (stack_a[i] / (limit / 31)))
+        g = 248 - (8 * (stack_a[i] / (NB_SIZE / 31)))
         pg.draw.rect(SCREEN, (r, g, b), (30, 120 + (int(height) * i), width * stack_a[i], height));
-    for i in range(len(stack_b)):
+    limit = len(stack_b)
+    if (limit > 500):
+        height = 1
+        limit = 500
+    for i in range(limit):
         #draw a rectangle, (surface, color, position & dimention, x, y, width, height
-        g = 248 - (8 * (stack_b[i] / (limit / 31)))
+        g = 248 - (8 * (stack_b[i] / (NB_SIZE / 31)))
         pg.draw.rect(SCREEN, (r, g, b), (60 + GRAPH_WIDTH, 120 + (int(height) * i), width * stack_b[i], height));
+    args_len = len(ops)
+    if args_len > 50:
+        args_len = 50;
+    for i in range(args_len):
+        font = pg.font.SysFont('Futura', 10);
+        ops_nb += 1
+        ops_str = ' [ ' + str(ops_nb) + ' ]'
+        text = font.render(ops_str, True, (255,255,255));
+        text_rect = text.get_rect(center=(MARGIN * 3 + GRAPH_WIDTH * 2, (120 + (10 * i))))
+        SCREEN.blit(text, text_rect)
+        text = font.render(str(ops[i]), True, (255,255,255));
+        text_rect = text.get_rect(center=(MARGIN * 3 + GRAPH_WIDTH * 2 + 30, (120 + (10 * i))))
+        SCREEN.blit(text, text_rect)
 
 def text():
     #title
-    font = pg.font.SysFont('Futura', 25);
-    text = font.render("itkimura push_swap visualizer", True, (255,255,255));
+    font = pg.font.SysFont('Futura', 20);
+    text = font.render("[Press Sapce to start] itkimura push_swap visualizer", True, (255,255,255));
     text_rect = text.get_rect(center=(SCREEN_WIDTH/2, 30))
     SCREEN.blit(text, text_rect)
 
@@ -77,18 +99,35 @@ def text():
     b_text = font.render("ops", True, (255,255,255));
     SCREEN.blit(b_text, [SCREEN_WIDTH - 130, 60])
 
+def push_swap():
+    random_str = [str(n) for n in random]
+    args =  " ".join(random_str)
+    data = subprocess.Popen([PUSH_SWAP, args], stdout=subprocess.PIPE)
+    output = data.stdout.read()
+    data.stdout.close()
+    output = list(output.decode("utf-8").split("\n"))
+    output.pop()
+    return (output)
+
 def main():
     pg.init()
     stack_a = init_width(random)
-    stack_b = [3, 4, 5]
+    stack_b = []
+    output = push_swap()
+    output_nb = 0
+    execute = False
     while True:
-        execute = False
+        pg.time.delay(DELAY_TIME)
         keys = pg.key.get_pressed()
+        print_stack(stack_a, stack_b, output, output_nb)
+        pg.display.update()
         if keys[pg.K_SPACE]:
             execute = True
-        if execute == False:
-            print_stack(stack_a, stack_b)
-            pg.display.update()
+        if execute == True:
+            if len(output) != 0:
+                apply_ops(str(output[0]), stack_a, stack_b)
+                output_nb += 1
+                del output[0]
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
