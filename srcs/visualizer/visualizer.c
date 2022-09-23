@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:32:31 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/12 10:38:26 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/23 12:45:16 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,14 @@ void	visualizer(t_dlst *stack_a, t_dlst *stack_b, char *input)
 	ft_printf("\E[H\E[2J");
 	if (!input)
 	{
-		input = ft_strdup("Start");
+		ft_printf("      input [%5s]  count[%5d]\n", input, count);
 		count = 0;
 	}
 	else
+	{
+		ft_printf("      input [%5s]  count[%5d]\n", input, count);
 		count++;
-	ft_printf("      input [%5s]  count[%5d]\n", input, count);
+	}
 	ft_printf("---------------------------------\n");
 	ft_printf("%15s | %-15s\n", "Stack A", "Stack B");
 	ft_printf("---------------------------------\n");

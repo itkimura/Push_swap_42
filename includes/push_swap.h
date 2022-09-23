@@ -6,14 +6,13 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:53:14 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/22 16:33:32 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/23 12:28:26 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <limits.h>
