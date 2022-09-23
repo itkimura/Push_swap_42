@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:31:41 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/22 16:30:26 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:04:19 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	push_swap(int ac, char **av)
 
 int	main(int ac, char **av)
 {
-	if (ac >= 2)
+	if (ac > 1)
 	{
 		if (!push_swap(ac, av))
 			return (1);

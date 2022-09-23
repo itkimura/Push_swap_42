@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/23 13:56:25 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:14:28 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ int	main(int ac, char **av)
 	{
 		stack_a = NULL;
 		stack_b = NULL;
-		if (!init_checker(ac, av, &stack_a, &stack_b))
+		if (!init_checker(ac, av, &stack_a, &stack_b)
+			|| stack_size(stack_a) == 0)
 			return (free_stacks(&stack_a, &stack_b));
 		if (!checker(stack_a, stack_b, activate_display(ac, av)))
 			error();
