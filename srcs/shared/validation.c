@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/23 12:46:32 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:53:48 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 */
 void	error(void)
 {
-	ft_putstr("Error\n");
+	ft_putstr_fd("Error\n", 2);
 }
 
 int	dublicate_check(int nb, t_dlst **curr)

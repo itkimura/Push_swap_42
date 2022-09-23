@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:23:03 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/23 12:17:00 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:56:25 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,14 @@ int	main(int ac, char **av)
 	t_dlst	*stack_a;
 	t_dlst	*stack_b;
 
-	if (ac >= 2)
+	if (ac > 1 && !(ac == 2 && !ft_strcmp(av[1], "-v")))
 	{
 		stack_a = NULL;
 		stack_b = NULL;
 		if (!init_checker(ac, av, &stack_a, &stack_b))
 			return (free_stacks(&stack_a, &stack_b));
 		if (!checker(stack_a, stack_b, activate_display(ac, av)))
-			ft_putstr("Error\n");
+			error();
 		else
 		{
 			if (!is_sorted(stack_a, stack_b))
