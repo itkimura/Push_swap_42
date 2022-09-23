@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:53:14 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/23 14:13:21 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:20:26 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
+# include <stdbool.h>
 # include <limits.h>
 # include "libft.h"
 # include "get_next_line.h"
