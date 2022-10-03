@@ -40,7 +40,7 @@ VISUAL_OBJS		= $(addprefix	$(OBJS_DIR), $(VISUAL_FILES:.c=.o))
 
 # LIBFT
 LIB				= -L./libft/ -lft
-LIBFT			= /libft/libft.a
+LIBFT			= ./libft/libft.a
 
 # COLORS
 GREEN			:= $(shell tput -Txterm setaf 2)
