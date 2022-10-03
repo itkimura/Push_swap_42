@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:52:01 by itkimura          #+#    #+#             */
-/*   Updated: 2022/09/16 12:01:41 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:53:48 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 */
 void	error(void)
 {
-	ft_putstr("Error\n");
+	ft_putstr_fd("Error\n", 2);
 }
 
 int	dublicate_check(int nb, t_dlst **curr)
@@ -60,7 +60,9 @@ int	is_valid_str(char *str, t_dlst **curr, int *total)
 		while (str[i] == ' ')
 			i++;
 		start = i;
-		if (!is_valid_nb(str, &i))
+		if (!str[i])
+			break ;
+		if (!is_valid_nb(str, &i) && str[i])
 			return (0);
 		if (!add_stack(&str[start], curr, total))
 			return (0);

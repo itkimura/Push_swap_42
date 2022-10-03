@@ -10,7 +10,7 @@ ac=$#
 flag=0
 detail=0
 if [ $ac -eq 0 -o "$1" = "--help" ]; then
-	echo -e "Discription:\n"
+	echo -e "Description:\n"
 	echo -e "  The scrip tests push_swap with random numbers between ${BOLD}INT_MIN${NC} and ${BOLD}INT_MAX${NC} for ${BOLD}200${NC} times as default\n"
 	echo -e "Basic usage:\n"
 	echo -e "  ${BOLD}bash push_swap_test.sh [the number of random numebers] optional:[lowest] optional:[heighet]${NC}\n"
