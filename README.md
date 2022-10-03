@@ -20,6 +20,7 @@ How to see the make command options:
 ```
 make help
 ```
+![Screenshot 2022-10-03 at 16 53 36](https://user-images.githubusercontent.com/61685238/193595018-e146bf74-543a-4ca3-8e33-61259d6d5108.png)
 
 ## Variables
 | Name | Description |
