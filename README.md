@@ -24,11 +24,19 @@ make help
 
 ## Programmes
 ### Double linked list
-The two stacks are implemented with double linked list.
+The two stacks are implemented with double linked list. The double linked list start with dummy node to reach the top and the last node easily.
 ![My first board - Frame 1](https://user-images.githubusercontent.com/61685238/193664179-ddb92d1d-8e26-4181-a724-f0ab0ddae977.jpg)
 
 
 ## Algorithm
+
+
+## Bonus: Visualizer
+
+
+https://user-images.githubusercontent.com/61685238/193667484-22919b1a-fd21-4db0-ab76-b738367523eb.mov
+
+
 
 ## Flowchart
 ```mermaid
@@ -37,4 +45,8 @@ The two stacks are implemented with double linked list.
       validate_args-->|All inputs are valid|init_numbers;
       init_numbers-->|No duplication and all numbers are valid as int. Insert all into int string |init_stack;
 ```
+
+
+
+
 
