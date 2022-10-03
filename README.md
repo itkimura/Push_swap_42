@@ -22,19 +22,13 @@ make help
 ```
 ![Screenshot 2022-10-03 at 16 53 36](https://user-images.githubusercontent.com/61685238/193595018-e146bf74-543a-4ca3-8e33-61259d6d5108.png)
 
-## Variables
-| Name | Description |
-| --- | --- |
-| t_dlst | double linked list for stack |
+## Programmes
+### Double linked list
+The two stacks are implemented with double linked list.
+![My first board - Frame 1](https://user-images.githubusercontent.com/61685238/193664179-ddb92d1d-8e26-4181-a724-f0ab0ddae977.jpg)
 
-## Files
-All source files are in ./srcs/
-| Name | Description |
-| --- | --- |
-| push_swap.c | main for push_swap |
-| validate_arg.c | validate inputs as integers |
-| checker.c | source file for checker |
 
+## Algorithm
 
 ## Flowchart
 ```mermaid
