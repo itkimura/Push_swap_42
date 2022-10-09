@@ -90,7 +90,7 @@ https://user-images.githubusercontent.com/61685238/193667484-22919b1a-fd21-4db0-
       validation-->|All inputs are valid|sorting;
       validation-->|wrong format|Error;
       sorting-->|less than 7|DFS;
-      sorting-->|more than 7|quick_search;
+      sorting-->|more than 7|quick_sort;
       DFS-->output
       quick_search-->output
 ```
